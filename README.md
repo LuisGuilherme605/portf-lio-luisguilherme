@@ -1,6 +1,6 @@
 # 💼 Portfólio — Luis Guilherme
 
-[![Site no ar](https://img.shields.io/badge/Ver_online-D97757?style=for-the-badge&logo=googlechrome&logoColor=white)](https://luisguilherme605.github.io/portfolio-luis-guilherme/)
+[![Site no ar](https://img.shields.io/badge/Ver_online-D97757?style=for-the-badge&logo=googlechrome&logoColor=white)](https://luisguilherme605.github.io/portf-lio-luisguilherme/)
 
 Meu site pessoal onde concentro meus projetos, habilidades e formas de contato.
 Construído com HTML, CSS e JavaScript puro — sem framework nenhum.
@@ -46,8 +46,8 @@ favicon.svg      → ícone do site
 ## 🚀 Rodando localmente
 
 ```bash
-git clone https://github.com/LuisGuilherme605/portfolio-luis-guilherme.git
-cd portfolio-luis-guilherme
+git clone https://github.com/LuisGuilherme605/portf-lio-luisguilherme.git
+cd portf-lio-luisguilherme
 ```
 
 Abra `index.html` no navegador ou use o Live Server no VS Code.
