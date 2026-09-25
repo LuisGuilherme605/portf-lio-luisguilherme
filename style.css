@@ -683,6 +683,14 @@ hr.sep {
   background: #3b82f6;
 }
 
+.proj-thumb.prospecto-theme {
+  background: linear-gradient(140deg, #0f1510 0%, #0a1a12 40%, #081a0e 100%);
+}
+
+.prospecto-theme .proj-thumb-glow {
+  background: #22c55e;
+}
+
 .proj-badge {
   position: absolute;
   top: 1rem;
