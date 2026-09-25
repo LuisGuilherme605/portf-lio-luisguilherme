@@ -1,64 +1,55 @@
-# 💼 Portfólio — Luis Guilherme
+# Portfólio — Luis Guilherme
 
-[![Site no ar](https://img.shields.io/badge/Ver_online-D97757?style=for-the-badge&logo=googlechrome&logoColor=white)](https://luisguilherme605.github.io/portf-lio-luisguilherme/)
+[Ver online](https://luisguilherme605.github.io/portf-lio-luisguilherme/)
 
-Meu site pessoal onde concentro meus projetos, habilidades e formas de contato.
-Construído com HTML, CSS e JavaScript puro — sem framework nenhum.
+Site pessoal com meus projetos, habilidades e contato. HTML, CSS e JavaScript puro — sem framework.
 
-## ✨ Funcionalidades
+## Destaques
 
-- **Design dark temático** com paleta em tons terrosos e dourados
-- **Fundo de estrelas animadas** em canvas — com drift, twinkling e pausa automática quando a aba sai de foco
-- **Robô mascote 3D** em WebGL (Three.js) que segue o cursor e pisca
-- **Cursor personalizado** com trail e efeito hover em links
-- **Efeito tilt 3D** nos cards de habilidades e projetos
-- **Bilíngue PT/EN** com detecção automática do idioma do navegador e persistência em localStorage
-- **Contadores animados** nas estatísticas com easing cúbico
-- **Menu hambúrguer** no mobile com overlay fullscreen
-- **Parallax** sutil no grid do hero
-- **Scroll animations** (fade-in) com Intersection Observer
-- **Botão flutuante de WhatsApp** com efeito pulse
-- **Layout 100% responsivo** — desktop, tablet e mobile
-- **Acessibilidade**: `prefers-reduced-motion`, `aria-labels`, semântica HTML5
+- Fundo de estrelas animadas em canvas, com drift e twinkling, que pausa sozinho quando a aba sai de foco
+- Mascote 3D em WebGL (Three.js) que segue o cursor
+- Cursor customizado com trail e hover nos links
+- Tilt 3D nos cards de habilidades e projetos
+- Bilíngue PT/EN, com detecção automática do idioma do navegador e persistência em localStorage
+- Scroll animations via Intersection Observer, parallax sutil no hero
+- Layout responsivo, com suporte a `prefers-reduced-motion` e semântica HTML5
 
-## 🛠️ Stack
+## Stack
 
 | Tecnologia | Uso |
 |:---|:---|
-| HTML5 | Estrutura semântica com Open Graph e meta tags SEO |
+| HTML5 | Estrutura semântica, Open Graph, meta tags de SEO |
 | CSS3 | Animações, gradientes, `clamp()`, grid/flexbox, variáveis CSS |
-| JavaScript | Canvas, Intersection Observer, localStorage, DOM manipulation |
-| Three.js | Robô mascote 3D em WebGL |
-| Google Fonts | Sora (corpo) + Space Mono (detalhe/monospace) |
+| JavaScript | Canvas, Intersection Observer, localStorage |
+| Three.js | Mascote 3D em WebGL |
+| Google Fonts | Sora (corpo) + Space Mono (detalhe) |
 
-## 📁 Estrutura
+## Estrutura
 
 ```
-index.html       → página principal
-style.css        → estilos principais (reset, layout, componentes, responsivo)
-features.css     → estilos do toggle de idioma e botão WhatsApp
-script.js        → estrelas, cursor, parallax, observers, menu, tilt, contadores
-features.js      → lógica PT/EN com detecção automática
-robot3d.js       → robô mascote 3D (Three.js module)
-favicon.svg      → ícone do site
+index.html       página principal
+style.css        estilos principais
+features.css     toggle de idioma e botão de WhatsApp
+script.js        estrelas, cursor, parallax, observers, menu, tilt
+features.js      lógica PT/EN
+robot3d.js       mascote 3D (Three.js)
 ```
 
-## 🚀 Rodando localmente
+## Rodando localmente
 
 ```bash
 git clone https://github.com/LuisGuilherme605/portf-lio-luisguilherme.git
 cd portf-lio-luisguilherme
 ```
 
-Abra `index.html` no navegador ou use o Live Server no VS Code.
+Abra `index.html` no navegador, ou use o Live Server do VS Code.
 
-## 📬 Contato
+## Contato
 
-- **Email:** lg5104891@gmail.com
-- **LinkedIn:** [luis-guilherme-dev](https://www.linkedin.com/in/luis-guilherme-126072360)
-- **GitHub:** [LuisGuilherme605](https://github.com/LuisGuilherme605)
-- **WhatsApp:** [(61) 99873-0501](https://wa.me/5561998730501)
+Email: lg5104891@gmail.com
+LinkedIn: [luis-guilherme-dev](https://www.linkedin.com/in/luis-guilherme-126072360)
+WhatsApp: [(61) 99873-0501](https://wa.me/5561998730501)
 
 ---
 
-Feito por **Luis Guilherme Vitorino Roberto** · Brasília, DF · 2026
+Luis Guilherme Vitorino Roberto — Brasília, DF, 2026.
