@@ -21,8 +21,8 @@ import * as THREE from "three";
     H = 140;
 
   // cores do site
-  var PURPLE = 0x7c5cfc;
-  var TEAL = 0x00e5b4;
+  var WARM = 0xd97757;
+  var GOLD = 0xc9a869;
 
   var renderer;
   try {
@@ -45,10 +45,10 @@ import * as THREE from "three";
 
   // ---- luzes coloridas (dao a "vida"/brilho) ----
   scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  var keyLight = new THREE.PointLight(PURPLE, 110, 60, 2);
+  var keyLight = new THREE.PointLight(WARM, 110, 60, 2);
   keyLight.position.set(4, 4, 6);
   scene.add(keyLight);
-  var rimLight = new THREE.PointLight(TEAL, 90, 60, 2);
+  var rimLight = new THREE.PointLight(GOLD, 90, 60, 2);
   rimLight.position.set(-5, -1, 4);
   scene.add(rimLight);
   var topLight = new THREE.DirectionalLight(0xffffff, 1.1);
@@ -57,12 +57,12 @@ import * as THREE from "three";
 
   // ---- materiais ----
   var bodyMat = new THREE.MeshStandardMaterial({
-    color: 0x2a2a4d,
+    color: 0x2a2420,
     metalness: 0.6,
     roughness: 0.35,
   });
   var trimMat = new THREE.MeshStandardMaterial({
-    color: 0x141430,
+    color: 0x1a1614,
     metalness: 0.75,
     roughness: 0.3,
   });
@@ -72,14 +72,14 @@ import * as THREE from "three";
     roughness: 0.12,
   });
   var eyeMat = new THREE.MeshStandardMaterial({
-    color: TEAL,
-    emissive: TEAL,
+    color: GOLD,
+    emissive: GOLD,
     emissiveIntensity: 1.7,
     roughness: 0.2,
   });
   var coreMat = new THREE.MeshStandardMaterial({
-    color: PURPLE,
-    emissive: PURPLE,
+    color: WARM,
+    emissive: WARM,
     emissiveIntensity: 1.4,
     roughness: 0.2,
   });
@@ -100,13 +100,21 @@ import * as THREE from "three";
 
   // olhos (grupo proprio pra piscar/seguir)
   var eyes = new THREE.Group();
-  var eyeGeo = new THREE.SphereGeometry(0.22, 24, 24);
+  var eyeGeo = new THREE.SphereGeometry(0.25, 24, 24);
   var eyeL = new THREE.Mesh(eyeGeo, eyeMat);
   eyeL.position.set(-0.46, 0.97, 0.95);
   var eyeR = new THREE.Mesh(eyeGeo, eyeMat);
   eyeR.position.set(0.46, 0.97, 0.95);
   eyes.add(eyeL, eyeR);
   robot.add(eyes);
+
+  // boca — linha horizontal sutil abaixo dos olhos
+  var mouth = new THREE.Mesh(
+    new THREE.BoxGeometry(0.55, 0.06, 0.06),
+    eyeMat
+  );
+  mouth.position.set(0, 0.72, 0.95);
+  robot.add(mouth);
 
   // antena + ponta brilhante
   var antenna = new THREE.Mesh(

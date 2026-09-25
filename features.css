@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   gap: 1px;
-  background: rgba(124, 92, 252, 0.08);
+  background: rgba(217, 119, 87, 0.08);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0.4rem 0.55rem;
@@ -20,8 +20,8 @@
 }
 
 .lang-toggle:hover {
-  border-color: rgba(124, 92, 252, 0.45);
-  background: rgba(124, 92, 252, 0.14);
+  border-color: rgba(217, 119, 87, 0.45);
+  background: rgba(217, 119, 87, 0.14);
 }
 
 .lang-toggle .lang-sep {
@@ -50,7 +50,7 @@ body.en .lang-toggle .lang-en {
 /* Botao de idioma dentro do menu mobile */
 .mobile-lang {
   margin-top: 0.5rem;
-  background: rgba(124, 92, 252, 0.1);
+  background: rgba(217, 119, 87, 0.1);
   border: 1px solid var(--border);
   border-radius: 50px;
   padding: 0.7rem 1.6rem;

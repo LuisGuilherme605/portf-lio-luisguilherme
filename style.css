@@ -35,45 +35,9 @@ body {
   color: var(--text);
   overflow-x: hidden;
   line-height: 1.6;
-  cursor: none;
-}
-
-/* ========================================
-   CUSTOM CURSOR
-   ======================================== */
-#cursor {
-  position: fixed;
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s, width 0.3s, height 0.3s, background 0.3s;
-  mix-blend-mode: difference;
-}
-
-#cursor-trail {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(217, 119, 87, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: left 0.12s ease, top 0.12s ease, width 0.3s, height 0.3s;
-}
-
-/* ========================================
-   CANVAS STARS
-   ======================================== */
-#star-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(217, 119, 87, 0.03) 0%, transparent 50%),
+                     radial-gradient(ellipse at 80% 20%, rgba(201, 168, 105, 0.025) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
 /* ========================================
@@ -133,53 +97,6 @@ nav {
   padding: 8rem 6rem 5rem;
   position: relative;
   overflow: hidden;
-}
-
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(100px);
-  animation: float 11s ease-in-out infinite;
-}
-
-.hero-orb-1 {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, rgba(217, 119, 87, 0.14), transparent 70%);
-  top: -100px;
-  right: -100px;
-}
-
-.hero-orb-2 {
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(201, 168, 105, 0.08), transparent 70%);
-  bottom: 50px;
-  left: -50px;
-  animation-delay: -3s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(22px, -34px) scale(1.06);
-  }
-  66% {
-    transform: translate(-16px, -14px) scale(1.02);
-  }
-}
-
-.hero-grid-bg {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(217, 119, 87, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217, 119, 87, 0.025) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 90% 70% at 60% 40%, black, transparent);
 }
 
 .hero-eyebrow {
@@ -257,8 +174,7 @@ h1.hero-name {
 .hero-name .name-first,
 .hero-role,
 .hero-desc,
-.hero-ctas,
-.hero .scroll-hint {
+.hero-ctas {
   animation: heroRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
@@ -276,9 +192,6 @@ h1.hero-name {
 }
 .hero-ctas {
   animation-delay: 0.86s;
-}
-.hero .scroll-hint {
-  animation-delay: 1.05s;
 }
 
 .hero-role {
@@ -355,44 +268,6 @@ h1.hero-name {
   border-color: var(--accent2);
   color: var(--accent2);
   transform: translateY(-3px);
-}
-
-/* ========================================
-   SCROLL INDICATOR
-   ======================================== */
-.scroll-hint {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  color: var(--muted);
-  font-family: "Space Mono", monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.scroll-hint::after {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-
-@keyframes scrollPulse {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 1;
-  }
 }
 
 /* ========================================
@@ -722,7 +597,7 @@ hr.sep {
   padding: 0.22rem 0.7rem;
   border-radius: 20px;
   background: rgba(217, 119, 87, 0.1);
-  color: rgba(180, 160, 255, 0.9);
+  color: var(--accent2);
   border: 1px solid rgba(217, 119, 87, 0.18);
   letter-spacing: 0.05em;
 }
@@ -752,9 +627,9 @@ hr.sep {
 }
 
 .proj-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(217, 119, 87, 0.55);
-  box-shadow: 0 24px 60px rgba(217, 119, 87, 0.12);
+  transform: translateY(-4px);
+  border-color: rgba(217, 119, 87, 0.4);
+  box-shadow: 0 16px 40px rgba(217, 119, 87, 0.08);
 }
 
 .proj-thumb {
@@ -1131,7 +1006,7 @@ hr.sep {
 
 .tl-badge.purple {
   background: rgba(217, 119, 87, 0.1);
-  color: #b4a0ff;
+  color: var(--accent);
   border-color: rgba(217, 119, 87, 0.2);
 }
 
@@ -1359,7 +1234,10 @@ footer {
     display: flex;
   }
 
-  .hero,
+  .hero {
+    padding: 7rem 1.5rem 4rem;
+  }
+
   section.content,
   .stack-section {
     padding-left: 1.5rem;
@@ -1379,9 +1257,13 @@ footer {
 
   .about-layout,
   .contact-layout,
-  .timeline-grid,
-  .stack-content {
+  .timeline-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .stack-content {
+    flex-direction: column;
     gap: 2.5rem;
   }
 
@@ -1389,13 +1271,74 @@ footer {
     display: none;
   }
 
-  body {
-    cursor: auto;
+  .proj-footer {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
   }
 
-  #cursor,
-  #cursor-trail {
-    display: none;
+  .proj-footer > div[style] {
+    width: 100%;
+  }
+
+  .proj-link {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+  }
+
+  h1.hero-name {
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+  }
+
+  .hero-ctas .btn-glow,
+  .hero-ctas .btn-ghost {
+    text-align: center;
+    width: 100%;
+  }
+
+  section.content {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-row {
+    grid-template-columns: 1fr;
+  }
+
+  .c-link {
+    font-size: 0.82rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .c-link div:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  .contact-quote {
+    padding: 1.25rem;
+    font-size: 0.88rem;
+  }
+
+  .marquee-item {
+    padding: 0 1.5rem;
+    font-size: 0.7rem;
   }
 }
 
