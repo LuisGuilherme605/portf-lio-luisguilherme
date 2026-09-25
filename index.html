@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de Luis Guilherme Vitorino Roberto — Desenvolvedor Front-End, estudante de ADS no UDF, Brasilia/DF. Projetos reais publicados com HTML, CSS, JavaScript e Python.">
+  <meta name="keywords" content="desenvolvedor, front-end, portfolio, HTML, CSS, JavaScript, Python, Brasilia, ADS, UDF">
+  <meta name="author" content="Luis Guilherme Vitorino Roberto">
+  <meta name="theme-color" content="#07070f">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Luis Guilherme — Dev Frontend & ADS">
+  <meta property="og:description" content="Portfolio de Luis Guilherme — Desenvolvedor Front-End com projetos reais publicados na web.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://luisguilherme605.github.io/portfolio-luis-guilherme/">
+  <meta property="og:locale" content="pt_BR">
+
+  <title>Luis Guilherme — Dev Frontend & ADS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Sora:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="features.css">
+
+  <!-- Three.js para o robo 3D -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-trail" aria-hidden="true"></div>
+
+<!-- Stars Background -->
+<canvas id="star-canvas" aria-hidden="true"></canvas>
+
+<!-- Navigation -->
+<nav aria-label="Menu principal">
+  <a href="#" class="nav-logo">LG.dev</a>
+  <ul class="nav-links">
+    <li><a href="#sobre" data-en="About">Sobre</a></li>
+    <li><a href="#habilidades" data-en="Skills">Skills</a></li>
+    <li><a href="#stack" data-en="Stack">Stack</a></li>
+    <li><a href="#projetos" data-en="Projects">Projetos</a></li>
+    <li><a href="#formacao" data-en="Education">Formacao</a></li>
+    <li><a href="#contato" data-en="Contact">Contato</a></li>
+  </ul>
+  <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma / Change language">
+    <span class="lang-pt">PT</span><span class="lang-sep">/</span><span class="lang-en">EN</span>
+  </button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu de navegacao" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu de navegacao">
+  <a href="#sobre" class="mobile-link" data-en="About">Sobre</a>
+  <a href="#habilidades" class="mobile-link" data-en="Skills">Skills</a>
+  <a href="#stack" class="mobile-link" data-en="Stack">Stack</a>
+  <a href="#projetos" class="mobile-link" data-en="Projects">Projetos</a>
+  <a href="#formacao" class="mobile-link" data-en="Education">Formacao</a>
+  <a href="#contato" class="mobile-link" data-en="Contact">Contato</a>
+  <button class="mobile-lang" id="langToggleMobile" aria-label="Mudar idioma / Change language">
+    <span class="lang-pt">Portugues</span> <span class="lang-sep">/</span> <span class="lang-en">English</span>
+  </button>
+</div>
+
+<!-- Hero -->
+<section class="hero" aria-label="Apresentacao">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-line" aria-hidden="true"></div>
+    <span data-en="Developer · Brasília, DF">Desenvolvedor · Brasilia, DF</span>
+  </div>
+
+  <h1 class="hero-name">
+    <span class="name-first">Luis Guilherme</span>
+    <span class="name-last">Vitorino Roberto</span>
+  </h1>
+
+  <p class="hero-role" data-en="<span>ADS</span> · Front-End Developer · <span>Python</span> · Advanced English">
+    <span>ADS</span> · Front-End Developer · <span>Python</span> · Ingles Avancado
+  </p>
+
+  <p class="hero-desc" data-en="18 years old. I turn code into interfaces people don't forget. Looking for my first big opportunity.">
+    18 anos de idade. Transformo codigo em interfaces que as pessoas nao esquecem. Buscando minha primeira grande oportunidade.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#projetos" class="btn-glow" data-en="See my projects &rarr;">Ver meus projetos &rarr;</a>
+    <a href="#contato" class="btn-ghost" data-en="Get in touch">Entre em contato</a>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">scroll</div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="dot"></span> HTML &amp; CSS</div>
+    <div class="marquee-item"><span class="dot"></span> JavaScript</div>
+    <div class="marquee-item"><span class="dot"></span> Python</div>
+    <div class="marquee-item"><span class="dot"></span> Back-End Dev</div>
+    <div class="marquee-item"><span class="dot"></span> UI Design</div>
+    <div class="marquee-item"><span class="dot"></span> Git &amp; GitHub</div>
+    <div class="marquee-item"><span class="dot"></span> Netlify Deploy</div>
+    <div class="marquee-item"><span class="dot"></span> <span data-en="Advanced English">Ingles Avancado</span></div>
+    <div class="marquee-item"><span class="dot"></span> ADS — UDF</div>
+    <div class="marquee-item"><span class="dot"></span> <span data-en="Programming Logic">Logica de Programacao</span></div>
+    <!-- Duplicado para loop continuo -->
+    <div class="marquee-item"><span class="dot"></span> HTML &amp; CSS</div>
+    <div class="marquee-item"><span class="dot"></span> JavaScript</div>
+    <div class="marquee-item"><span class="dot"></span> Python</div>
+    <div class="marquee-item"><span class="dot"></span> Back-End Dev</div>
+    <div class="marquee-item"><span class="dot"></span> UI Design</div>
+    <div class="marquee-item"><span class="dot"></span> Git &amp; GitHub</div>
+    <div class="marquee-item"><span class="dot"></span> Netlify Deploy</div>
+    <div class="marquee-item"><span class="dot"></span> <span data-en="Advanced English">Ingles Avancado</span></div>
+    <div class="marquee-item"><span class="dot"></span> ADS — UDF</div>
+    <div class="marquee-item"><span class="dot"></span> <span data-en="Programming Logic">Logica de Programacao</span></div>
+  </div>
+</div>
+
+<!-- Sobre -->
+<section class="content" id="sobre">
+  <div class="about-layout">
+    <div class="about-body fi">
+      <div class="section-eyebrow" data-en="About me">Sobre mim</div>
+      <h2 class="section-h" data-en="Young dev<br>passionate about code">Jovem dev<br>apaixonado por codigo</h2>
+      <p data-en="I'm <strong>Luis Guilherme</strong>, 18, from Brasília/DF. I study <strong>Systems Analysis and Development</strong> at UDF and already have real projects published online that show my ability to craft high-level interfaces.">Sou <strong>Luis Guilherme</strong>, 18 anos, Brasilia/DF. Curso <strong>Analise e Desenvolvimento de Sistemas</strong> no UDF e ja tenho projetos reais publicados na web que demonstram minha capacidade de criar interfaces de alto nivel.</p>
+      <p data-en="I have a <em>natural ability</em> for design and front-end development, blending aesthetics with functionality. My advanced English lets me learn from the world's best sources — documentation, tutorials and technical articles straight in English.">Tenho <em>habilidade natural</em> para design e desenvolvimento front-end, combinando estetica com funcionalidade. Meu ingles avancado me permite aprender com as melhores fontes do mundo — documentacoes, tutoriais e artigos tecnicos diretamente em ingles.</p>
+      <p data-en="I'm looking for my <strong>first formal opportunity</strong> as a developer. I learn fast, deliver with quality, and I'm hungry to grow.">Procuro minha <strong>primeira oportunidade formal</strong> como desenvolvedor. Aprendo rapido, entrego com qualidade e tenho sede de crescer.</p>
+      <div class="avail-pill" style="margin-top:1.5rem">
+        <div class="pulse-dot" aria-hidden="true"></div>
+        <span data-en="Available for opportunities">Disponivel para oportunidades</span>
+      </div>
+    </div>
+    <div class="stats-stack fi fi-d2">
+      <div class="stat-row">
+        <div class="stat-box">
+          <span class="stat-n">18</span>
+          <span class="stat-l" data-en="Years old">Anos de idade</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-n">2</span>
+          <span class="stat-l" data-en="Sites published">Sites publicados</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-box">
+          <span class="stat-n">ADS</span>
+          <span class="stat-l" data-en="In progress">Em andamento</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-n">EN</span>
+          <span class="stat-l" data-en="Advanced English">Ingles avancado</span>
+        </div>
+      </div>
+      <div class="stat-box" style="text-align:center">
+        <span class="stat-n" style="font-size:1.4rem" data-en="Brasília, DF">Brasilia, DF</span>
+        <span class="stat-l" data-en="Brazil">Brasil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Habilidades -->
+<section class="content" id="habilidades">
+  <div class="section-eyebrow fi" data-en="Skills">Habilidades</div>
+  <h2 class="section-h fi" data-en="What I do<br>well">O que eu sei<br>fazer bem</h2>
+  <p class="section-sub fi" data-en="Technical and soft skills I apply to every project.">Competencias tecnicas e comportamentais que aplico em cada projeto.</p>
+
+  <div class="skills-grid">
+    <article class="skill-card fi fi-d1">
+      <span class="sk-icon" aria-hidden="true">&#x1F40D;</span>
+      <h3 class="sk-name">Python &amp; Back-End</h3>
+      <p class="sk-desc" data-en="Back-end development with Python, applied programming logic and functional scripts. Trained at Alura.">Desenvolvimento back-end com Python, logica de programacao aplicada e criacao de scripts funcionais. Formado pela Alura.</p>
+      <div class="sk-tags">
+        <span class="sk-tag">Python</span>
+        <span class="sk-tag">Back-End</span>
+        <span class="sk-tag" data-en="Algorithms">Algoritmos</span>
+      </div>
+    </article>
+    <article class="skill-card fi fi-d2">
+      <span class="sk-icon" aria-hidden="true">&#x1F3A8;</span>
+      <h3 class="sk-name">Front-End &amp; UI Design</h3>
+      <p class="sk-desc" data-en="Complete web interfaces with HTML, CSS and JS — animations, responsive layouts and designs that stand out.">Interfaces web completas com HTML, CSS e JS — animacoes, layouts responsivos e designs que se destacam visualmente.</p>
+      <div class="sk-tags">
+        <span class="sk-tag">HTML5</span>
+        <span class="sk-tag">CSS3</span>
+        <span class="sk-tag">JavaScript</span>
+      </div>
+    </article>
+    <article class="skill-card fi fi-d3">
+      <span class="sk-icon" aria-hidden="true">&#x1F310;</span>
+      <h3 class="sk-name" data-en="Advanced English">Ingles Avancado</h3>
+      <p class="sk-desc" data-en="Fluent technical communication. Access to international content, English documentation and collaboration with global teams.">Comunicacao tecnica fluente. Acesso a conteudo internacional, documentacoes em ingles e colaboracao com times globais.</p>
+      <div class="sk-tags">
+        <span class="sk-tag">C1 Level</span>
+        <span class="sk-tag">Technical</span>
+        <span class="sk-tag">CIL Certified</span>
+      </div>
+    </article>
+    <article class="skill-card fi fi-d1">
+      <span class="sk-icon" aria-hidden="true">&#x1F680;</span>
+      <h3 class="sk-name" data-en="Deploy &amp; Versioning">Deploy &amp; Versionamento</h3>
+      <p class="sk-desc" data-en="Shipping projects to production with Netlify, version control with Git and collaboration via GitHub.">Publicacao de projetos em producao com Netlify, controle de versao com Git e colaboracao via GitHub.</p>
+      <div class="sk-tags">
+        <span class="sk-tag">Git</span>
+        <span class="sk-tag">GitHub</span>
+        <span class="sk-tag">Netlify</span>
+      </div>
+    </article>
+    <article class="skill-card fi fi-d2">
+      <span class="sk-icon" aria-hidden="true">&#x1F9E0;</span>
+      <h3 class="sk-name" data-en="Experience Design">Design de Experiencia</h3>
+      <p class="sk-desc" data-en="Visual architecture, typography, information hierarchy and responsive design. Focused on user experience.">Arquitetura visual, tipografia, hierarquia de informacao e design responsivo. Foco na experiencia do usuario.</p>
+      <div class="sk-tags">
+        <span class="sk-tag">UX/UI</span>
+        <span class="sk-tag">Responsive</span>
+        <span class="sk-tag">Typography</span>
+      </div>
+    </article>
+    <article class="skill-card fi fi-d3">
+      <span class="sk-icon" aria-hidden="true">&#x1F4A1;</span>
+      <h3 class="sk-name">Soft Skills</h3>
+      <p class="sk-desc" data-en="Fast learning, organization, clear communication and genuine motivation to face new challenges with energy.">Aprendizado rapido, organizacao, comunicacao clara e motivacao genuina para encarar desafios novos com energia.</p>
+      <div class="sk-tags">
+        <span class="sk-tag" data-en="Proactive">Proativo</span>
+        <span class="sk-tag" data-en="Organized">Organizado</span>
+        <span class="sk-tag" data-en="Communicative">Comunicativo</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Stack -->
+<section class="stack-section" id="stack">
+  <div class="stack-content">
+    <div class="stack-text fi">
+      <div class="section-eyebrow" data-en="Tools">Ferramentas</div>
+      <h2 class="section-h" data-en="My tech<br>stack">Meu stack<br>tecnologico</h2>
+      <p class="section-sub" data-en="The technologies I use to build modern, functional web products.">As tecnologias que uso para construir produtos web modernos e funcionais.</p>
+      <div class="stack-items">
+        <div class="stack-item"><span aria-hidden="true">&#x1F40D;</span> Python</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F310;</span> HTML5</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F3A8;</span> CSS3</div>
+        <div class="stack-item"><span aria-hidden="true">&#x26A1;</span> JavaScript</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F419;</span> Git/GitHub</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F680;</span> Netlify</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F4F1;</span> Responsive Design</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F524;</span> Google Fonts</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F3AF;</span> CSS Animations</div>
+        <div class="stack-item"><span aria-hidden="true">&#x1F6E0;&#xFE0F;</span> VS Code</div>
+      </div>
+    </div>
+    <div class="stack-visual" aria-hidden="true">
+      <div class="orbit-ring orbit-ring-1">
+        <div class="orbit-dot">PY</div>
+      </div>
+      <div class="orbit-ring orbit-ring-2">
+        <div class="orbit-dot">JS</div>
+      </div>
+      <div class="orbit-ring orbit-ring-3">
+        <div class="orbit-dot">GIT</div>
+      </div>
+      <div class="orbit-center">
+        <svg viewBox="0 0 40 40" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 11 L6 20 L15 29"/>
+          <path d="M25 11 L34 20 L25 29"/>
+          <path d="M22 9 L18 31"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Projetos -->
+<section class="content" id="projetos">
+  <div class="section-eyebrow fi" data-en="Projects">Projetos</div>
+  <h2 class="section-h fi" data-en="Real sites,<br>online now">Sites reais,<br>online agora</h2>
+  <p class="section-sub fi" data-en="Complete projects I built and shipped — you can visit them right now.">Projetos completos que construi e publiquei — voce pode visitar agora mesmo.</p>
+
+  <div class="projects-grid">
+    <article class="proj-card fi fi-d1">
+      <div class="proj-thumb brasilia-theme">
+        <div class="proj-thumb-glow" aria-hidden="true"></div>
+        <div class="proj-thumb-inner">
+          <svg class="proj-thumb-icon" viewBox="0 0 68 52" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="44" x2="64" y2="44"/>
+            <path d="M7 30 a10 10 0 0 0 20 0"/>
+            <path d="M41 30 a10 10 0 0 1 20 0"/>
+            <rect x="31" y="6" width="2.6" height="38" rx="1"/>
+            <rect x="35.4" y="6" width="2.6" height="38" rx="1"/>
+          </svg>
+          <div class="proj-thumb-name">brasilia3d</div>
+        </div>
+        <div class="proj-badge">Live</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-type" data-en="Interactive Web · 3D Tourism">Web Interativo · Turismo 3D</div>
+        <h3 class="proj-name">Brasilia 3D — Guia Turistico Interativo</h3>
+        <p class="proj-desc" data-en="Interactive 3D tourist guide for Brasília. Immersive navigation through the capital's main landmarks with three-dimensional visualization. Built with vanilla HTML, CSS and JavaScript.">Guia turistico interativo em 3D para Brasilia. Navegacao imersiva pelos principais pontos turisticos da capital federal com visualizacao tridimensional. Desenvolvido com HTML, CSS e JavaScript puro.</p>
+        <div class="proj-footer">
+          <div class="proj-techs">
+            <span class="sk-tag">HTML</span>
+            <span class="sk-tag">CSS</span>
+            <span class="sk-tag">JS</span>
+            <span class="sk-tag">Canvas 3D</span>
+          </div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <a href="https://luisguilherme605.github.io/Brasilia3D/" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="Visit site &rarr;">Ver site &rarr;</a>
+            <a href="https://github.com/LuisGuilherme605/Brasilia3D" target="_blank" rel="noopener noreferrer" class="proj-link" data-en="View code &rarr;">Ver codigo &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Formacao -->
+<section class="content" id="formacao">
+  <div class="section-eyebrow fi" data-en="Education">Formacao</div>
+  <h2 class="section-h fi" data-en="Education &amp;<br>certifications">Educacao &amp;<br>certificacoes</h2>
+  <p class="section-sub fi" data-en="My formal learning journey and complementary courses.">Minha trajetoria de aprendizado formal e cursos complementares.</p>
+
+  <div class="timeline-grid">
+    <div>
+      <div class="timeline-col-title education" data-en="— Formal Education">— Educacao Formal</div>
+      <div class="timeline fi">
+        <div class="tl-item">
+          <div class="tl-date" data-en="2026 — Present">2026 — Presente</div>
+          <div class="tl-title" data-en="Systems Analysis and Development">Analise e Desenvolvimento de Sistemas</div>
+          <div class="tl-where" data-en="UDF University Center · Brasília, DF">UDF Centro Universitario · Brasilia, DF</div>
+          <span class="tl-badge" data-en="In progress">Em andamento</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2023 — 2025</div>
+          <div class="tl-title" data-en="High School">Ensino Medio</div>
+          <div class="tl-where" data-en="Civic-Military School CED 03, Sobradinho · DF">Colegio Civico Militar CED 03 de Sobradinho · DF</div>
+          <span class="tl-badge" data-en="Completed">Concluido</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2019 — 2025</div>
+          <div class="tl-title" data-en="Advanced English">Ingles Avancado</div>
+          <div class="tl-where" data-en="CIL – Interscholastic Language Center · Brasília, DF">CIL – Centro Interescolar de Linguas · Brasilia, DF</div>
+          <span class="tl-badge" data-en="Completed">Concluido</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="timeline-col-title courses" data-en="— Technical Courses">— Cursos Tecnicos</div>
+      <div class="timeline fi fi-d2">
+        <div class="tl-item">
+          <div class="tl-date">Alura</div>
+          <div class="tl-title" data-en="Back-End Development with Python">Desenvolvimento Back-End com Python</div>
+          <div class="tl-where" data-en="Alura Platform · Online">Plataforma Alura · Ensino Online</div>
+          <span class="tl-badge purple" data-en="Completed">Concluido</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Alura</div>
+          <div class="tl-title" data-en="Programming Logic">Logica de Programacao</div>
+          <div class="tl-where" data-en="Alura Platform · Online">Plataforma Alura · Ensino Online</div>
+          <span class="tl-badge purple" data-en="Completed">Concluido</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date" data-en="Practice">Pratica</div>
+          <div class="tl-title">Front-End &amp; Web Design</div>
+          <div class="tl-where" data-en="Original projects published on Netlify">Projetos autorais publicados no Netlify</div>
+          <span class="tl-badge purple" data-en="Evolving">Em evolucao</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Contato -->
+<section class="content" id="contato">
+  <div class="contact-layout">
+    <div class="fi">
+      <div class="section-eyebrow" data-en="Contact">Contato</div>
+      <h2 class="section-h" data-en="Let's build<br>something amazing?">Vamos construir<br>algo incrivel?</h2>
+      <p class="contact-intro" data-en="I'm looking for my first opportunity as a developer. If you have a role, project or idea that fits me — I'd love to talk.">Estou buscando minha primeira oportunidade como desenvolvedor. Se voce tem uma vaga, projeto ou ideia que combina comigo — adoraria conversar.</p>
+      <div class="avail-pill">
+        <div class="pulse-dot" aria-hidden="true"></div>
+        <span data-en="Available immediately">Disponivel imediatamente</span>
+      </div>
+      <blockquote class="contact-quote" data-en="&quot;I'm 18, <strong>but I deliver like someone experienced</strong>. I learn in real time and don't stop until the project is exactly right.&quot;">
+        "Tenho 18 anos, <strong>mas entrego como quem tem experiencia</strong>. Aprendo em tempo real e nao paro ate o projeto ficar exatamente certo."
+      </blockquote>
+    </div>
+    <div class="contact-links fi fi-d2">
+      <a href="mailto:lg5104891@gmail.com" class="c-link">
+        <div class="c-icon" aria-hidden="true">&#x2709;&#xFE0F;</div>
+        <div>
+          <small data-en="Email">E-mail</small>
+          lg5104891@gmail.com
+        </div>
+      </a>
+      <a href="https://github.com/LuisGuilherme605" target="_blank" rel="noopener noreferrer" class="c-link">
+        <div class="c-icon" aria-hidden="true">&#x1F419;</div>
+        <div>
+          <small>GitHub</small>
+          github.com/LuisGuilherme605
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/luis-guilherme-dev" target="_blank" rel="noopener noreferrer" class="c-link">
+        <div class="c-icon" aria-hidden="true">&#x1F4BC;</div>
+        <div>
+          <small>LinkedIn</small>
+          luis-guilherme-dev
+        </div>
+      </a>
+      <a href="tel:+5561998730501" class="c-link">
+        <div class="c-icon" aria-hidden="true">&#x1F4F1;</div>
+        <div>
+          <small data-en="WhatsApp / Phone">WhatsApp / Telefone</small>
+          (61) 99873-0501
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">LG.dev</span>
+  <span class="footer-text">&copy; 2026 Luis Guilherme Vitorino Roberto · Brasilia, DF</span>
+  <span class="footer-flag" aria-hidden="true">&#x1F1E7;&#x1F1F7;</span>
+</footer>
+
+<!-- Robo mascote 3D — robo em WebGL que segue o mouse (so desktop) -->
+<div id="robo" class="robo" aria-hidden="true">
+  <canvas id="robo-canvas"></canvas>
+</div>
+
+<!-- Botao flutuante de WhatsApp -->
+<a href="https://wa.me/5561998730501?text=Ol%C3%A1%20Luis%2C%20vi%20seu%20portf%C3%B3lio%21" target="_blank" rel="noopener noreferrer" class="fab-whats" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.518 5.26l-.999 3.648 3.97-1.042zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+</a>
+
+<script src="script.js"></script>
+<script src="features.js"></script>
+<script type="module" src="robot3d.js"></script>
+</body>
+</html>
