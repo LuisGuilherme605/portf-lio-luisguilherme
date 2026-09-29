@@ -11,6 +11,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("vis");
+          observer.unobserve(entry.target);
         }
       });
     },
@@ -61,9 +62,9 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   });
 })();
 
-/* Smooth Scroll for Anchor Links */
+/* Smooth Scroll for Anchor Links (o menu mobile tem handler proprio acima) */
 (function () {
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+  document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var href = link.getAttribute("href");
       if (href === "#") return;
