@@ -46,7 +46,8 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      var target = document.querySelector(link.getAttribute("href"));
+      var href = link.getAttribute("href");
+      var target = href && href !== "#" ? document.querySelector(href) : null;
       hamburger.classList.remove("open");
       mobileMenu.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
@@ -63,7 +64,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Smooth Scroll for Anchor Links */
 (function () {
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+  document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var href = link.getAttribute("href");
       if (href === "#") return;
