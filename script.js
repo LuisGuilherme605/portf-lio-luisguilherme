@@ -4,6 +4,16 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Rola ate a secao e move o foco pra ela, pra leitor de tela e teclado seguirem junto */
+function irParaSecao(target) {
+  target.classList.add("vis");
+  if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+  setTimeout(function () {
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    target.focus({ preventScroll: true });
+  }, 50);
+}
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -51,12 +61,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       mobileMenu.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-      if (target) {
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
-      }
+      if (target) irParaSecao(target);
     });
   });
 })();
@@ -70,10 +75,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
+        irParaSecao(target);
       }
     });
   });
