@@ -34,8 +34,8 @@
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
     document.title = en
-      ? "Luis Guilherme — Front-End Developer & Tech Student"
-      : "Luis Guilherme — Dev Frontend & ADS";
+      ? "Luis Guilherme — JavaScript, React & Node.js Developer"
+      : "Luis Guilherme — Desenvolvedor JavaScript, React e Node.js";
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
