@@ -2,6 +2,8 @@
    PORTFOLIO — Luis Guilherme
    ======================================== */
 
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -52,7 +54,7 @@
       if (target) {
         target.classList.add("vis");
         setTimeout(function () {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
         }, 50);
       }
     });
@@ -70,14 +72,12 @@
         e.preventDefault();
         target.classList.add("vis");
         setTimeout(function () {
-          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
         }, 50);
       }
     });
   });
 })();
-
-var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* Tilt 3D nos cards */
 (function () {
