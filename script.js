@@ -65,6 +65,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 (function () {
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener("click", function (e) {
+      if (e.defaultPrevented) return;
       var href = link.getAttribute("href");
       if (href === "#") return;
       var target = document.querySelector(href);
