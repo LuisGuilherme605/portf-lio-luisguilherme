@@ -33,6 +33,9 @@
     document.documentElement.lang = en ? "en" : "pt-BR";
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
+    toggles.forEach(function (btn) {
+      if (btn) btn.setAttribute("aria-pressed", en ? "true" : "false");
+    });
     document.title = en
       ? "Luis Guilherme — Front-End Developer & Tech Student"
       : "Luis Guilherme — Dev Frontend & ADS";
