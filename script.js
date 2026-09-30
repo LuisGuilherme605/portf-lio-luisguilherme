@@ -63,7 +63,8 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Smooth Scroll for Anchor Links */
 (function () {
-  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+  // Os links do menu mobile já têm handler próprio (fecham o menu antes de rolar).
+  document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var href = link.getAttribute("href");
       if (href === "#") return;
