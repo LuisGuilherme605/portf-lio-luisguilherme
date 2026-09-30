@@ -5,6 +5,7 @@
    ======================================== */
 (function () {
   var STORE = "lang";
+  var titlePt = document.title;
   var toggles = [
     document.getElementById("langToggle"),
     document.getElementById("langToggleMobile"),
@@ -35,7 +36,7 @@
     translate(en ? "en" : "pt");
     document.title = en
       ? "Luis Guilherme — Front-End Developer & Tech Student"
-      : "Luis Guilherme — Dev Frontend & ADS";
+      : titlePt;
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
