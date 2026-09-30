@@ -5,6 +5,8 @@
    ======================================== */
 (function () {
   var STORE = "lang";
+  var TITLE_PT = document.title;
+  var TITLE_EN = "Luis Guilherme — JavaScript, React & Node.js Developer";
   var toggles = [
     document.getElementById("langToggle"),
     document.getElementById("langToggleMobile"),
@@ -33,9 +35,7 @@
     document.documentElement.lang = en ? "en" : "pt-BR";
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
-    document.title = en
-      ? "Luis Guilherme — Front-End Developer & Tech Student"
-      : "Luis Guilherme — Dev Frontend & ADS";
+    document.title = en ? TITLE_EN : TITLE_PT;
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
