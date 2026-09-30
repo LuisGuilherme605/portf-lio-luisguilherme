@@ -84,19 +84,30 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (reduceMotion || window.matchMedia("(max-width: 820px)").matches) return;
   var cards = document.querySelectorAll(".proj-card, .skill-card");
   cards.forEach(function (card) {
+    var frame = null;
     card.addEventListener("mousemove", function (e) {
-      var r = card.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      card.classList.add("tilt-on");
-      card.style.transform =
-        "perspective(720px) rotateX(" +
-        (-py * 5).toFixed(2) +
-        "deg) rotateY(" +
-        (px * 5).toFixed(2) +
-        "deg) translateY(-4px)";
+      if (frame) return;
+      var x = e.clientX,
+        y = e.clientY;
+      frame = requestAnimationFrame(function () {
+        frame = null;
+        var r = card.getBoundingClientRect();
+        var px = (x - r.left) / r.width - 0.5;
+        var py = (y - r.top) / r.height - 0.5;
+        card.classList.add("tilt-on");
+        card.style.transform =
+          "perspective(720px) rotateX(" +
+          (-py * 5).toFixed(2) +
+          "deg) rotateY(" +
+          (px * 5).toFixed(2) +
+          "deg) translateY(-4px)";
+      });
     });
     card.addEventListener("mouseleave", function () {
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
       card.classList.remove("tilt-on");
       card.style.transform = "";
     });
