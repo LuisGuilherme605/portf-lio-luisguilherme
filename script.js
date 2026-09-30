@@ -43,6 +43,14 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  window.matchMedia("(min-width: 821px)").addEventListener("change", function (e) {
+    if (!e.matches || !mobileMenu.classList.contains("open")) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
