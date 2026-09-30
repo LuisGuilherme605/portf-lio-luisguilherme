@@ -28,14 +28,16 @@
     }
   }
 
+  // O titulo em portugues vem do proprio HTML, para nao divergir dele.
+  var titlePt = document.title;
+  var titleEn = "Luis Guilherme — JavaScript, React & Node.js Developer";
+
   function apply(lang) {
     var en = lang === "en";
     document.documentElement.lang = en ? "en" : "pt-BR";
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
-    document.title = en
-      ? "Luis Guilherme — Front-End Developer & Tech Student"
-      : "Luis Guilherme — Dev Frontend & ADS";
+    document.title = en ? titleEn : titlePt;
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
