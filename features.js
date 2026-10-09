@@ -38,6 +38,9 @@
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
     document.title = en ? titleEn : titlePt;
+    toggles.forEach(function (btn) {
+      if (btn) btn.setAttribute("aria-pressed", en ? "true" : "false");
+    });
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
