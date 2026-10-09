@@ -43,6 +43,16 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  // Girar o aparelho ou ampliar a janela com o menu aberto deixava o overlay
+  // preso na tela, ja que o botao some na largura de desktop.
+  window.addEventListener("resize", function () {
+    if (!mobileMenu.classList.contains("open") || window.innerWidth <= 900) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
