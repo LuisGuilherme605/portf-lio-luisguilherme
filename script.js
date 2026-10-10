@@ -34,6 +34,15 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
+  // Se a janela passar do breakpoint com o menu aberto, o body ficava preso sem scroll.
+  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
+    if (!e.matches || !mobileMenu.classList.contains("open")) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
     hamburger.classList.remove("open");
