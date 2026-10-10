@@ -44,7 +44,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   });
 
   // girar o aparelho ou redimensionar a janela com o menu aberto deixava o scroll travado
-  window.matchMedia("(min-width: 821px)").addEventListener("change", function (e) {
+  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
     if (!e.matches || !mobileMenu.classList.contains("open")) return;
     hamburger.classList.remove("open");
     mobileMenu.classList.remove("open");
