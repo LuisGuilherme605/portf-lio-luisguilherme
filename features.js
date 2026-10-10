@@ -38,6 +38,11 @@
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
     document.title = en ? titleEn : titlePt;
+    // O rotulo anuncia a acao do botao, que e trocar para o outro idioma.
+    var label = en ? "Mudar para português" : "Switch to English";
+    toggles.forEach(function (btn) {
+      if (btn) btn.setAttribute("aria-label", label);
+    });
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)
