@@ -6,6 +6,14 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Fade-In Observer */
 (function () {
+  // Sem IntersectionObserver as secoes ficariam invisiveis (.fi comeca com opacity 0).
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".fi").forEach(function (el) {
+      el.classList.add("vis");
+    });
+    return;
+  }
+
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
