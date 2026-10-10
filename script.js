@@ -4,6 +4,17 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Rola ate a secao, atualiza o hash e leva o foco junto (leitor de tela e teclado) */
+function irParaSecao(target, href) {
+  target.classList.add("vis");
+  setTimeout(function () {
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, "", href);
+  }, 50);
+}
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -52,10 +63,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
       if (target) {
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
+        irParaSecao(target, link.getAttribute("href"));
       }
     });
   });
@@ -70,10 +78,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
+        irParaSecao(target, href);
       }
     });
   });

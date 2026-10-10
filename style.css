@@ -1479,3 +1479,8 @@ footer {
     display: none;
   }
 }
+
+/* Secao recebe foco ao navegar pela ancora; sem contorno, so serve ao leitor de tela */
+[tabindex="-1"]:focus {
+  outline: none;
+}
