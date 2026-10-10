@@ -11,6 +11,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("vis");
+          observer.unobserve(entry.target);
         }
       });
     },
