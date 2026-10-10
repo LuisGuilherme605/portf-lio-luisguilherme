@@ -27,6 +27,13 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
 
+  function fecharMenu() {
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
   hamburger.addEventListener("click", function () {
     hamburger.classList.toggle("open");
     var isOpen = mobileMenu.classList.toggle("open");
@@ -36,10 +43,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
-    hamburger.classList.remove("open");
-    mobileMenu.classList.remove("open");
-    hamburger.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
+    fecharMenu();
     hamburger.focus();
   });
 
@@ -47,10 +51,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     link.addEventListener("click", function (e) {
       e.preventDefault();
       var target = document.querySelector(link.getAttribute("href"));
-      hamburger.classList.remove("open");
-      mobileMenu.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+      fecharMenu();
       if (target) {
         target.classList.add("vis");
         setTimeout(function () {
