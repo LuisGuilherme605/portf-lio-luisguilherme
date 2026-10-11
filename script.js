@@ -43,6 +43,16 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  // Girar o celular ou alargar a janela com o menu aberto deixava o scroll
+  // da pagina travado, ja que o menu mobile some mas o overflow ficava hidden.
+  window.matchMedia("(min-width: 821px)").addEventListener("change", function (e) {
+    if (!e.matches) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
