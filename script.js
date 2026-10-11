@@ -6,6 +6,12 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Fade-In Observer */
 (function () {
+  if (!("IntersectionObserver" in window)) {
+    document.querySelectorAll(".fi").forEach(function (el) {
+      el.classList.add("vis");
+    });
+    return;
+  }
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
@@ -105,7 +111,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Contador animado nos numeros das stats */
 (function () {
-  if (reduceMotion) return;
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
   var targets = [];
   document.querySelectorAll(".stat-n").forEach(function (el) {
     var raw = el.textContent.trim();
