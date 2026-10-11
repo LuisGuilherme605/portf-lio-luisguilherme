@@ -27,10 +27,15 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
 
+  function setLabel(isOpen) {
+    hamburger.setAttribute("aria-label", isOpen ? "Fechar menu de navegacao" : "Abrir menu de navegacao");
+  }
+
   hamburger.addEventListener("click", function () {
     hamburger.classList.toggle("open");
     var isOpen = mobileMenu.classList.toggle("open");
     hamburger.setAttribute("aria-expanded", String(isOpen));
+    setLabel(isOpen);
     document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
@@ -39,6 +44,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.classList.remove("open");
     mobileMenu.classList.remove("open");
     hamburger.setAttribute("aria-expanded", "false");
+    setLabel(false);
     document.body.style.overflow = "";
     hamburger.focus();
   });
@@ -50,6 +56,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       hamburger.classList.remove("open");
       mobileMenu.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
+      setLabel(false);
       document.body.style.overflow = "";
       if (target) {
         target.classList.add("vis");
