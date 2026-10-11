@@ -66,7 +66,11 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
     link.addEventListener("click", function (e) {
       var href = link.getAttribute("href");
-      if (href === "#") return;
+      if (href === "#") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+        return;
+      }
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
