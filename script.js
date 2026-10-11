@@ -6,18 +6,28 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Fade-In Observer */
 (function () {
+  var items = document.querySelectorAll(".fi");
+  // navegador sem IntersectionObserver: mostra tudo em vez de deixar o conteudo escondido
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(function (el) {
+      el.classList.add("vis");
+    });
+    return;
+  }
+
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("vis");
+          observer.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.05 }
   );
 
-  document.querySelectorAll(".fi").forEach(function (el) {
+  items.forEach(function (el) {
     observer.observe(el);
   });
 })();
