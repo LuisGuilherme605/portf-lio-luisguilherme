@@ -22,6 +22,17 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   });
 })();
 
+/* Rola ate a secao, atualiza o hash e leva o foco junto (teclado e leitor de tela) */
+function irPara(target, hash) {
+  target.classList.add("vis");
+  setTimeout(function () {
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+    if (history.replaceState) history.replaceState(null, "", hash);
+  }, 50);
+}
+
 /* Hamburger Menu */
 (function () {
   var hamburger = document.getElementById("hamburger");
@@ -51,12 +62,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       mobileMenu.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-      if (target) {
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
-      }
+      if (target) irPara(target, link.getAttribute("href"));
     });
   });
 })();
@@ -70,10 +76,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
+        irPara(target, href);
       }
     });
   });

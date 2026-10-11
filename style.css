@@ -1479,3 +1479,7 @@ footer {
     display: none;
   }
 }
+
+[tabindex="-1"]:focus {
+  outline: none;
+}
