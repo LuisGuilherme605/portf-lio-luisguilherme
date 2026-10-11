@@ -34,23 +34,29 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     document.body.style.overflow = isOpen ? "hidden" : "";
   });
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
+  function closeMenu() {
     hamburger.classList.remove("open");
     mobileMenu.classList.remove("open");
     hamburger.setAttribute("aria-expanded", "false");
     document.body.style.overflow = "";
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
+    closeMenu();
     hamburger.focus();
+  });
+
+  // Ao passar do breakpoint (ex.: girar o tablet) o hamburger some, entao o overlay nao pode ficar preso
+  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
+    if (e.matches) closeMenu();
   });
 
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
       var target = document.querySelector(link.getAttribute("href"));
-      hamburger.classList.remove("open");
-      mobileMenu.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+      closeMenu();
       if (target) {
         target.classList.add("vis");
         setTimeout(function () {
