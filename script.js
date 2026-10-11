@@ -43,6 +43,15 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  // Se a janela passa do breakpoint com o menu aberto, devolve o scroll da pagina.
+  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
+    if (!e.matches) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
