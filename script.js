@@ -43,6 +43,16 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  // Girar o aparelho ou alargar a janela com o menu aberto deixaria a tela
+  // presa: o botao some acima de 900px e o scroll continua travado.
+  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
+    if (!e.matches || !mobileMenu.classList.contains("open")) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
