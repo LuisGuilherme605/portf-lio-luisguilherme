@@ -26,6 +26,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 (function () {
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
+  if (!hamburger || !mobileMenu) return;
 
   hamburger.addEventListener("click", function () {
     hamburger.classList.toggle("open");
