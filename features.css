@@ -148,3 +148,8 @@ body.en .mobile-lang .lang-en {
     animation: none;
   }
 }
+
+/* A nav flutuante cobria o topo da secao ao navegar pelas ancoras */
+section[id] {
+  scroll-margin-top: 5rem;
+}
