@@ -53,6 +53,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       document.body.style.overflow = "";
       if (target) {
         target.classList.add("vis");
+        if (history.replaceState) history.replaceState(null, "", link.getAttribute("href"));
         setTimeout(function () {
           target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
         }, 50);
@@ -71,6 +72,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       if (target) {
         e.preventDefault();
         target.classList.add("vis");
+        if (history.replaceState) history.replaceState(null, "", link.getAttribute("href"));
         setTimeout(function () {
           target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
         }, 50);
