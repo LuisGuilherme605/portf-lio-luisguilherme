@@ -4,6 +4,14 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* Rola ate a secao revelando-a antes, para o fade-in nao atrasar o destino */
+function scrollToSection(target) {
+  target.classList.add("vis");
+  setTimeout(function () {
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }, 50);
+}
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -43,6 +51,15 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     hamburger.focus();
   });
 
+  // Menu aberto e janela alargada: fecha e devolve a rolagem da pagina
+  window.matchMedia("(min-width: 821px)").addEventListener("change", function (e) {
+    if (!e.matches || !mobileMenu.classList.contains("open")) return;
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  });
+
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
@@ -51,12 +68,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       mobileMenu.classList.remove("open");
       hamburger.setAttribute("aria-expanded", "false");
       document.body.style.overflow = "";
-      if (target) {
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
-      }
+      if (target) scrollToSection(target);
     });
   });
 })();
@@ -70,10 +82,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
       var target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
+        scrollToSection(target);
       }
     });
   });
