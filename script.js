@@ -27,6 +27,13 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
 
+  function closeMenu() {
+    hamburger.classList.remove("open");
+    mobileMenu.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+  }
+
   hamburger.addEventListener("click", function () {
     hamburger.classList.toggle("open");
     var isOpen = mobileMenu.classList.toggle("open");
@@ -36,21 +43,20 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
-    hamburger.classList.remove("open");
-    mobileMenu.classList.remove("open");
-    hamburger.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
+    closeMenu();
     hamburger.focus();
+  });
+
+  // Se a janela passar do breakpoint com o menu aberto, o body ficava sem scroll
+  window.matchMedia("(min-width: 821px)").addEventListener("change", function (e) {
+    if (e.matches && mobileMenu.classList.contains("open")) closeMenu();
   });
 
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
       var target = document.querySelector(link.getAttribute("href"));
-      hamburger.classList.remove("open");
-      mobileMenu.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+      closeMenu();
       if (target) {
         target.classList.add("vis");
         setTimeout(function () {
