@@ -166,6 +166,11 @@ import * as THREE from "three";
     targetRY = nx * 1.5; // gira esquerda/direita
     targetRX = ny * 1.0; // inclina cima/baixo
   });
+  // cursor saiu da janela: o robo volta a olhar pra frente
+  document.documentElement.addEventListener("mouseleave", function () {
+    targetRX = 0;
+    targetRY = 0;
+  });
 
   // ---- loop ----
   var clock = new THREE.Clock();
