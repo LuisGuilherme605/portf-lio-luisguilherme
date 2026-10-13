@@ -32,11 +32,26 @@
   var titlePt = document.title;
   var titleEn = "Luis Guilherme — JavaScript, React & Node.js Developer";
 
+  // aria-label nao passa pelo data-en, entao os rotulos de acessibilidade
+  // fixos ficam aqui.
+  var labels = {
+    hamburger: ["Abrir menu de navegacao", "Open navigation menu"],
+    mobileMenu: ["Menu de navegacao", "Navigation menu"],
+  };
+
+  function applyLabels(en) {
+    Object.keys(labels).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute("aria-label", labels[id][en ? 1 : 0]);
+    });
+  }
+
   function apply(lang) {
     var en = lang === "en";
     document.documentElement.lang = en ? "en" : "pt-BR";
     document.body.classList.toggle("en", en);
     translate(en ? "en" : "pt");
+    applyLabels(en);
     document.title = en ? titleEn : titlePt;
   }
 
