@@ -1479,3 +1479,8 @@ footer {
     display: none;
   }
 }
+
+/* Secao focada por codigo apos o scroll de ancora: sem contorno ao redor dela inteira */
+section[tabindex="-1"]:focus {
+  outline: none;
+}

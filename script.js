@@ -4,6 +4,13 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Depois do scroll por ancora o foco do teclado precisa acompanhar a secao,
+// senao o proximo Tab volta para o link de onde o clique saiu.
+function focusTarget(target) {
+  if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+  target.focus({ preventScroll: true });
+}
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -62,6 +69,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
         target.classList.add("vis");
         setTimeout(function () {
           target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+          focusTarget(target);
         }, 50);
       }
     });
@@ -80,6 +88,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
         target.classList.add("vis");
         setTimeout(function () {
           target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+          focusTarget(target);
         }, 50);
       }
     });
