@@ -4,6 +4,16 @@
 
 var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// href "#" ou seletor invalido faz querySelector lancar; aqui vira "sem alvo".
+function findAnchorTarget(href) {
+  if (!href || href === "#") return null;
+  try {
+    return document.querySelector(href);
+  } catch (e) {
+    return null;
+  }
+}
+
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
@@ -56,7 +66,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      var target = document.querySelector(link.getAttribute("href"));
+      var target = findAnchorTarget(link.getAttribute("href"));
       closeMenu();
       if (target) {
         target.classList.add("vis");
@@ -72,9 +82,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 (function () {
   document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
     link.addEventListener("click", function (e) {
-      var href = link.getAttribute("href");
-      if (href === "#") return;
-      var target = document.querySelector(href);
+      var target = findAnchorTarget(link.getAttribute("href"));
       if (target) {
         e.preventDefault();
         target.classList.add("vis");
