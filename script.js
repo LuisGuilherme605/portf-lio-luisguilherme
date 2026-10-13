@@ -56,7 +56,8 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   document.querySelectorAll(".mobile-link").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      var target = document.querySelector(link.getAttribute("href"));
+      var href = link.getAttribute("href");
+      var target = href && href !== "#" ? document.querySelector(href) : null;
       closeMenu();
       if (target) {
         target.classList.add("vis");
