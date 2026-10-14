@@ -7,10 +7,11 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 /* Fade-In Observer */
 (function () {
   var observer = new IntersectionObserver(
-    function (entries) {
+    function (entries, obs) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("vis");
+          obs.unobserve(entry.target);
         }
       });
     },
