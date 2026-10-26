@@ -36,6 +36,10 @@ motionQuery.addEventListener("change", (e) => {
   const hamburger = document.getElementById("hamburger");
   const mobileMenu = document.getElementById("mobileMenu");
 
+  // Seletor completo de tudo que pode receber foco por teclado
+  const FOCUSABLE =
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
   function setOpen(open) {
     hamburger.classList.toggle("open", open);
     mobileMenu.classList.toggle("open", open);
@@ -43,8 +47,8 @@ motionQuery.addEventListener("change", (e) => {
     mobileMenu.setAttribute("aria-hidden", String(!open));
     document.body.style.overflow = open ? "hidden" : "";
     if (open) {
-      // Primeiro link ganha foco pra leitor de tela confirmar a abertura
-      const first = mobileMenu.querySelector("a, button");
+      // Primeiro item focavel ganha foco pra leitor de tela confirmar a abertura
+      const first = mobileMenu.querySelector(FOCUSABLE);
       if (first) first.focus();
     }
   }
@@ -60,7 +64,7 @@ motionQuery.addEventListener("change", (e) => {
   // Focus trap: Tab/Shift+Tab circulam entre os itens enquanto o menu esta aberto
   mobileMenu.addEventListener("keydown", (e) => {
     if (e.key !== "Tab" || !mobileMenu.classList.contains("open")) return;
-    const items = mobileMenu.querySelectorAll("a, button");
+    const items = mobileMenu.querySelectorAll(FOCUSABLE);
     if (!items.length) return;
     const first = items[0];
     const last = items[items.length - 1];
