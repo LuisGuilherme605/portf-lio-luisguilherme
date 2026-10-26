@@ -1362,10 +1362,6 @@ footer {
     font-size: clamp(2rem, 9vw, 3rem);
   }
 
-  .hero-sub {
-    font-size: 0.85rem;
-  }
-
   .hero-ctas {
     flex-direction: column;
   }
@@ -1379,10 +1375,6 @@ footer {
   section.content {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
-  }
-
-  .sec-label {
-    font-size: 0.6rem;
   }
 
   h2 {
@@ -1406,20 +1398,12 @@ footer {
     font-size: 0.85rem;
   }
 
-  .proj-title {
-    font-size: 1.05rem;
-  }
-
   .tl-title {
     font-size: 0.95rem;
   }
 
   .tl-where {
     font-size: 0.78rem;
-  }
-
-  .tl-desc {
-    font-size: 0.82rem;
   }
 
   .c-link {
@@ -1487,11 +1471,17 @@ footer {
 
 /* ========================================
    TILT 3D — cards reagem ao cursor (mesmo motivo do robo)
+   will-change so entra em cena durante o tilt pra nao gastar camada o tempo todo.
    ======================================== */
 .proj-card,
 .skill-card {
   transform-style: preserve-3d;
+}
+
+.proj-card.tilt-on,
+.skill-card.tilt-on {
   will-change: transform;
+  transition: transform 0.12s ease-out;
 }
 
 .tilt-on {
