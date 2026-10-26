@@ -41,6 +41,8 @@
 </head>
 <body>
 
+<a href="#sobre" class="skip-link" data-en="Skip to main content">Pular para o conteudo</a>
+
 <!-- Navigation -->
 <nav aria-label="Menu principal">
   <a href="#" class="nav-logo">LG.dev</a>
@@ -52,23 +54,23 @@
     <li><a href="#formacao" data-en="Education">Formacao</a></li>
     <li><a href="#contato" data-en="Contact">Contato</a></li>
   </ul>
-  <button class="lang-toggle" id="langToggle" aria-label="Mudar idioma / Change language">
+  <button type="button" class="lang-toggle" id="langToggle" aria-label="Mudar idioma / Change language" aria-pressed="false">
     <span class="lang-pt">PT</span><span class="lang-sep">/</span><span class="lang-en">EN</span>
   </button>
-  <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu de navegacao" aria-expanded="false">
+  <button type="button" class="nav-hamburger" id="hamburger" aria-label="Abrir menu de navegacao" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- Mobile Menu -->
-<div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu de navegacao">
+<div class="nav-mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu de navegacao" aria-hidden="true">
   <a href="#sobre" class="mobile-link" data-en="About">Sobre</a>
   <a href="#habilidades" class="mobile-link" data-en="Skills">Skills</a>
   <a href="#stack" class="mobile-link" data-en="Stack">Stack</a>
   <a href="#projetos" class="mobile-link" data-en="Projects">Projetos</a>
   <a href="#formacao" class="mobile-link" data-en="Education">Formacao</a>
   <a href="#contato" class="mobile-link" data-en="Contact">Contato</a>
-  <button class="mobile-lang" id="langToggleMobile" aria-label="Mudar idioma / Change language">
+  <button type="button" class="mobile-lang" id="langToggleMobile" aria-label="Mudar idioma / Change language" aria-pressed="false">
     <span class="lang-pt">Portugues</span> <span class="lang-sep">/</span> <span class="lang-en">English</span>
   </button>
 </div>

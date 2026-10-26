@@ -27,19 +27,42 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
 
+  function setOpen(open) {
+    hamburger.classList.toggle("open", open);
+    mobileMenu.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", String(open));
+    mobileMenu.setAttribute("aria-hidden", String(!open));
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      // Primeiro link ganha foco pra leitor de tela confirmar a abertura
+      var first = mobileMenu.querySelector("a, button");
+      if (first) first.focus();
+    }
+  }
+
   hamburger.addEventListener("click", function () {
-    hamburger.classList.toggle("open");
-    var isOpen = mobileMenu.classList.toggle("open");
-    hamburger.setAttribute("aria-expanded", String(isOpen));
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    setOpen(!mobileMenu.classList.contains("open"));
   });
 
   function closeMenu() {
-    hamburger.classList.remove("open");
-    mobileMenu.classList.remove("open");
-    hamburger.setAttribute("aria-expanded", "false");
-    document.body.style.overflow = "";
+    setOpen(false);
   }
+
+  // Focus trap: Tab/Shift+Tab circulam entre os itens enquanto o menu esta aberto
+  mobileMenu.addEventListener("keydown", function (e) {
+    if (e.key !== "Tab" || !mobileMenu.classList.contains("open")) return;
+    var items = mobileMenu.querySelectorAll("a, button");
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
 
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;

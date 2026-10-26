@@ -29,6 +29,38 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Skip link - aparece ao receber foco por tab */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.7rem 1.1rem;
+  background: var(--accent);
+  color: #fff;
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  border-radius: 8px;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform 0.2s;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent2);
+  outline-offset: 2px;
+}
+
+/* Foco visivel para teclado em todos os elementos interativos */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 body {
   font-family: "Sora", sans-serif;
   background: var(--bg);
