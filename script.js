@@ -2,30 +2,33 @@
    PORTFOLIO — Luis Guilherme
    ======================================== */
 
-var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let reduceMotion = motionQuery.matches;
+motionQuery.addEventListener("change", (e) => {
+  reduceMotion = e.matches;
+});
 
 /* Fade-In Observer */
 (function () {
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("vis");
+          observer.unobserve(entry.target);
         }
       });
     },
     { threshold: 0.05 }
   );
 
-  document.querySelectorAll(".fi").forEach(function (el) {
-    observer.observe(el);
-  });
+  document.querySelectorAll(".fi").forEach((el) => observer.observe(el));
 })();
 
 /* Hamburger Menu */
 (function () {
-  var hamburger = document.getElementById("hamburger");
-  var mobileMenu = document.getElementById("mobileMenu");
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
 
   function setOpen(open) {
     hamburger.classList.toggle("open", open);
@@ -35,12 +38,12 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     document.body.style.overflow = open ? "hidden" : "";
     if (open) {
       // Primeiro link ganha foco pra leitor de tela confirmar a abertura
-      var first = mobileMenu.querySelector("a, button");
+      const first = mobileMenu.querySelector("a, button");
       if (first) first.focus();
     }
   }
 
-  hamburger.addEventListener("click", function () {
+  hamburger.addEventListener("click", () => {
     setOpen(!mobileMenu.classList.contains("open"));
   });
 
@@ -49,12 +52,12 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   }
 
   // Focus trap: Tab/Shift+Tab circulam entre os itens enquanto o menu esta aberto
-  mobileMenu.addEventListener("keydown", function (e) {
+  mobileMenu.addEventListener("keydown", (e) => {
     if (e.key !== "Tab" || !mobileMenu.classList.contains("open")) return;
-    var items = mobileMenu.querySelectorAll("a, button");
+    const items = mobileMenu.querySelectorAll("a, button");
     if (!items.length) return;
-    var first = items[0];
-    var last = items[items.length - 1];
+    const first = items[0];
+    const last = items[items.length - 1];
     if (e.shiftKey && document.activeElement === first) {
       e.preventDefault();
       last.focus();
@@ -64,7 +67,7 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     }
   });
 
-  document.addEventListener("keydown", function (e) {
+  document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape" || !mobileMenu.classList.contains("open")) return;
     closeMenu();
     hamburger.focus();
@@ -72,18 +75,18 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   // Passou do breakpoint com o menu aberto: o hamburger some, e o scroll
   // da pagina nao pode ficar travado.
-  window.matchMedia("(min-width: 901px)").addEventListener("change", function (e) {
+  window.matchMedia("(min-width: 901px)").addEventListener("change", (e) => {
     if (e.matches) closeMenu();
   });
 
-  document.querySelectorAll(".mobile-link").forEach(function (link) {
-    link.addEventListener("click", function (e) {
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      var target = document.querySelector(link.getAttribute("href"));
+      const target = document.querySelector(link.getAttribute("href"));
       closeMenu();
       if (target) {
         target.classList.add("vis");
-        setTimeout(function () {
+        setTimeout(() => {
           target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
         }, 50);
       }
@@ -93,40 +96,50 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
 /* Smooth Scroll for Anchor Links */
 (function () {
-  document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      var href = link.getAttribute("href");
+  document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
       if (href === "#") return;
-      var target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.classList.add("vis");
-        setTimeout(function () {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
-      }
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      target.classList.add("vis");
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      }, 50);
     });
   });
 })();
 
-/* Tilt 3D nos cards */
+/* Tilt 3D nos cards (desktop com ponteiro fino) */
 (function () {
-  if (reduceMotion || window.matchMedia("(max-width: 820px)").matches) return;
-  var cards = document.querySelectorAll(".proj-card, .skill-card");
-  cards.forEach(function (card) {
-    card.addEventListener("mousemove", function (e) {
-      var r = card.getBoundingClientRect();
-      var px = (e.clientX - r.left) / r.width - 0.5;
-      var py = (e.clientY - r.top) / r.height - 0.5;
-      card.classList.add("tilt-on");
-      card.style.transform =
-        "perspective(720px) rotateX(" +
-        (-py * 5).toFixed(2) +
-        "deg) rotateY(" +
-        (px * 5).toFixed(2) +
-        "deg) translateY(-4px)";
-    });
-    card.addEventListener("mouseleave", function () {
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+  if (reduceMotion || coarse || window.matchMedia("(max-width: 820px)").matches) return;
+
+  const cards = document.querySelectorAll(".proj-card, .skill-card");
+  cards.forEach((card) => {
+    let frame = null;
+    card.addEventListener(
+      "mousemove",
+      (e) => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.classList.add("tilt-on");
+          card.style.transform =
+            `perspective(720px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 5).toFixed(2)}deg) translateY(-4px)`;
+          frame = null;
+        });
+      },
+      { passive: true }
+    );
+    card.addEventListener("mouseleave", () => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+        frame = null;
+      }
       card.classList.remove("tilt-on");
       card.style.transform = "";
     });
@@ -136,9 +149,9 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 /* Contador animado nos numeros das stats */
 (function () {
   if (reduceMotion) return;
-  var targets = [];
-  document.querySelectorAll(".stat-n").forEach(function (el) {
-    var raw = el.textContent.trim();
+  const targets = [];
+  document.querySelectorAll(".stat-n").forEach((el) => {
+    const raw = el.textContent.trim();
     if (/^\d+$/.test(raw)) {
       el.dataset.end = raw;
       el.textContent = "0";
@@ -148,22 +161,22 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (!targets.length) return;
 
   function run(el) {
-    var end = parseInt(el.dataset.end, 10);
-    var dur = 1100,
-      start = null;
+    const end = parseInt(el.dataset.end, 10);
+    const dur = 1100;
+    let start = null;
     function step(ts) {
       if (!start) start = ts;
-      var p = Math.min((ts - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
+      const p = Math.min((ts - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
       el.textContent = Math.round(end * eased).toString();
       if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
-  var obs = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
           run(entry.target);
           obs.unobserve(entry.target);
@@ -172,7 +185,5 @@ var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     },
     { threshold: 0.6 }
   );
-  targets.forEach(function (el) {
-    obs.observe(el);
-  });
+  targets.forEach((el) => obs.observe(el));
 })();
