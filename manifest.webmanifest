@@ -1,0 +1,15 @@
+{
+  "name": "Luis Guilherme — Portfolio",
+  "short_name": "LG.dev",
+  "description": "Portfolio de Luis Guilherme Vitorino Roberto — Desenvolvedor JavaScript, React e Node.js.",
+  "start_url": "/portf-lio-luisguilherme/",
+  "scope": "/portf-lio-luisguilherme/",
+  "display": "standalone",
+  "background_color": "#07070f",
+  "theme_color": "#07070f",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
