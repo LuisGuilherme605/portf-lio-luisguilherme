@@ -27,6 +27,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Compensa a nav fixa pro conteudo nao ficar embaixo dela ao pular pra ancora */
+  scroll-padding-top: 90px;
 }
 
 /* Skip link - aparece ao receber foco por tab */

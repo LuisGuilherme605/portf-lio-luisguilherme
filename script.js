@@ -84,17 +84,20 @@ motionQuery.addEventListener("change", (e) => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute("href"));
       closeMenu();
-      if (target) {
-        target.classList.add("vis");
-        setTimeout(() => {
-          target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-        }, 50);
-      }
+      if (target) scrollToTarget(target);
     });
   });
 })();
 
 /* Smooth Scroll for Anchor Links */
+function scrollToTarget(target) {
+  target.classList.add("vis");
+  // Aguarda o proximo frame pra garantir que .vis entrou em cena antes do scroll
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  });
+}
+
 (function () {
   document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach((link) => {
     link.addEventListener("click", (e) => {
@@ -103,10 +106,7 @@ motionQuery.addEventListener("change", (e) => {
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      target.classList.add("vis");
-      setTimeout(() => {
-        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-      }, 50);
+      scrollToTarget(target);
     });
   });
 })();
