@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luisguilherme605.github.io/portf-lio-luisguilherme/sitemap.xml
