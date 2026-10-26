@@ -8,6 +8,12 @@ motionQuery.addEventListener("change", (e) => {
   reduceMotion = e.matches;
 });
 
+/* Ano do footer sempre atualizado */
+(function () {
+  const yearEl = document.getElementById("footer-year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+})();
+
 /* Fade-In Observer */
 (function () {
   const observer = new IntersectionObserver(
