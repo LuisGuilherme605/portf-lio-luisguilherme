@@ -523,6 +523,18 @@ hr.sep {
   letter-spacing: 0.1em;
 }
 
+.avail-pill--spaced {
+  margin-top: 1.5rem;
+}
+
+.stat-box--city {
+  text-align: center;
+}
+
+.stat-n--city {
+  font-size: 1.4rem;
+}
+
 .pulse-dot {
   width: 8px;
   height: 8px;
@@ -781,6 +793,12 @@ hr.sep {
 .proj-techs {
   display: flex;
   gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.proj-links-row {
+  display: flex;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -1326,7 +1344,7 @@ footer {
     align-items: stretch;
   }
 
-  .proj-footer > div[style] {
+  .proj-links-row {
     width: 100%;
   }
 
