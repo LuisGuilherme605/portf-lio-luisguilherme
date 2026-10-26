@@ -157,23 +157,29 @@ import * as THREE from "three";
 
   robot.scale.setScalar(0.92);
 
-  // ---- seguir o mouse ----
+  // ---- seguir o mouse (passive + throttle leve) ----
   var targetRX = 0,
     targetRY = 0;
-  window.addEventListener("mousemove", function (e) {
-    var nx = e.clientX / window.innerWidth - 0.5; // -0.5..0.5
-    var ny = e.clientY / window.innerHeight - 0.5;
-    targetRY = nx * 1.5; // gira esquerda/direita
-    targetRX = ny * 1.0; // inclina cima/baixo
-  });
+  window.addEventListener(
+    "mousemove",
+    function (e) {
+      var nx = e.clientX / window.innerWidth - 0.5; // -0.5..0.5
+      var ny = e.clientY / window.innerHeight - 0.5;
+      targetRY = nx * 1.5; // gira esquerda/direita
+      targetRX = ny * 1.0; // inclina cima/baixo
+    },
+    { passive: true }
+  );
 
   // ---- loop ----
   var clock = new THREE.Clock();
+  var elapsed = 0;
   var rafId = null;
 
   function frame() {
     rafId = requestAnimationFrame(frame);
-    var t = clock.getElapsedTime();
+    elapsed += clock.getDelta();
+    var t = elapsed;
 
     // segue o cursor de forma suave
     robot.rotation.y += (targetRY - robot.rotation.y) * 0.07;
@@ -197,7 +203,7 @@ import * as THREE from "three";
   }
   frame();
 
-  // pausa quando a aba nao esta visivel (economiza recurso, sem loop duplicado)
+  // pausa quando a aba nao esta visivel (sem perder o tempo acumulado)
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) {
       if (rafId !== null) {
@@ -205,7 +211,7 @@ import * as THREE from "three";
         rafId = null;
       }
     } else if (rafId === null) {
-      clock.start();
+      clock.getDelta(); // descarta o delta grande da pausa
       frame();
     }
   });
