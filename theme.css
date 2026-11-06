@@ -1,0 +1,122 @@
+/* ========================================
+   TEMA — botão de alternância + paleta clara
+   o escuro continua sendo o padrão (definido no style.css).
+   o claro é uma paleta quente de papel, não um branco genérico.
+   ======================================== */
+
+/* ----------------------------------------
+   BOTÃO DE TEMA (sol/lua)
+   ---------------------------------------- */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 32px;
+  background: rgba(217, 119, 87, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--muted);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.theme-toggle:hover {
+  border-color: rgba(217, 119, 87, 0.45);
+  background: rgba(217, 119, 87, 0.14);
+  color: var(--text);
+}
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.theme-ic {
+  display: flex;
+}
+/* mostra o alvo: no escuro aparece o sol (vira claro); no claro, a lua */
+.theme-ic-moon {
+  display: none;
+}
+:root[data-theme="light"] .theme-ic-sun {
+  display: none;
+}
+:root[data-theme="light"] .theme-ic-moon {
+  display: flex;
+}
+
+/* botão de tema dentro do menu mobile: redondo e maior */
+.theme-toggle--mobile {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+.theme-toggle--mobile svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* esconde o botão do topo no mobile (usa o do menu), igual ao de idioma */
+@media (max-width: 900px) {
+  nav .theme-toggle {
+    display: none;
+  }
+}
+
+/* ========================================
+   PALETA CLARA
+   redefine as variáveis; a maioria dos componentes já usa elas.
+   abaixo só os poucos pontos com cor fixa.
+   ======================================== */
+:root[data-theme="light"] {
+  --bg: #f5efe6;
+  --bg2: #fbf7f1;
+  --bg3: #ffffff;
+  --accent: #c0592f;
+  --accent2: #9a7528;
+  --accent3: #d9534a;
+  --text: #2b2018;
+  --muted: #6b6052;
+  --border: rgba(192, 89, 47, 0.22);
+  --card: rgba(43, 32, 24, 0.028);
+  --glow: rgba(192, 89, 47, 0.22);
+}
+
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(192, 89, 47, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(154, 117, 40, 0.06) 0%, transparent 40%);
+}
+
+:root[data-theme="light"] nav {
+  background: rgba(255, 253, 250, 0.82);
+}
+:root[data-theme="light"] .nav-mobile-menu {
+  background: #fbf7f1;
+}
+:root[data-theme="light"] .btn-ghost {
+  border-color: rgba(43, 32, 24, 0.16);
+}
+:root[data-theme="light"] .btn-ghost:hover {
+  border-color: var(--accent2);
+}
+:root[data-theme="light"] .to-top {
+  background: rgba(255, 253, 250, 0.88);
+}
+
+/* command palette no tema claro */
+:root[data-theme="light"] .cmdk kbd,
+:root[data-theme="light"] .cmdk-trigger kbd {
+  background: rgba(43, 32, 24, 0.06);
+}
+:root[data-theme="light"] .cmdk-backdrop {
+  background: rgba(60, 44, 30, 0.34);
+}
+
+/* modal de projeto no tema claro */
+:root[data-theme="light"] .pm-backdrop {
+  background: rgba(60, 44, 30, 0.38);
+}
+
+/* robô: no claro, sombra mais discreta pra não pesar */
+:root[data-theme="light"] .robo {
+  filter: drop-shadow(0 12px 22px rgba(192, 89, 47, 0.28));
+}

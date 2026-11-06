@@ -7,9 +7,9 @@
   <meta name="keywords" content="desenvolvedor, JavaScript, React, Node.js, Canvas, portfolio, Docker, Vite, Brasilia, ADS, UDF">
   <meta name="author" content="Luis Guilherme Vitorino Roberto">
   <meta name="theme-color" content="#07070f">
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="dark light">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Faf9sXG0awGyyKSihLAGEkc0ncSDXTju+oV1EBKi65g=' 'sha256-lHkmpuf+HUb4A9a3f21BfpChbG+j0Bf1sDpuPXf0+OM='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-Faf9sXG0awGyyKSihLAGEkc0ncSDXTju+oV1EBKi65g=' 'sha256-lHkmpuf+HUb4A9a3f21BfpChbG+j0Bf1sDpuPXf0+OM=' 'sha256-8ZvfH0n6bowR3YstQJNdMpvU6TLHeh8BjBdhOoSiwrM='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
   <link rel="canonical" href="https://luisguilherme605.github.io/portf-lio-luisguilherme/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -62,12 +62,16 @@
   }
   </script>
 
+  <!-- Tema aplicado antes da pintura (evita flash). Hash no CSP acima. -->
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var d=document.documentElement;d.setAttribute('data-theme',t);d.style.colorScheme=t;}catch(e){}})();</script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Sora:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="features.css">
   <link rel="stylesheet" href="enhancements.css">
+  <link rel="stylesheet" href="theme.css">
 
   <!-- Three.js para o robo 3D (CDN com SRI) -->
   <script type="importmap">
@@ -175,6 +179,11 @@
 <section class="content" id="sobre">
   <div class="about-layout">
     <div class="about-body fi">
+      <!-- Avatar: troque o <span> por <img src="sua-foto.jpg" alt="Luis Guilherme"> quando tiver uma foto -->
+      <div class="about-avatar" role="img" aria-label="Luis Guilherme Vitorino Roberto">
+        <span class="about-avatar-mono" aria-hidden="true">LG</span>
+        <span class="about-avatar-dot" aria-hidden="true"></span>
+      </div>
       <div class="section-eyebrow" data-en="About me">Sobre mim</div>
       <h2 class="section-h" data-en="Young dev<br>passionate about code">Jovem dev<br>apaixonado por codigo</h2>
       <p data-en="I'm <strong>Luis Guilherme</strong>, from Brasília/DF. I study <strong>Systems Analysis and Development</strong> at UDF. My projects have custom 3D graphics engines, back-ends with zero external dependencies, and 200+ automated tests.">Sou <strong>Luis Guilherme</strong>, Brasilia/DF. Curso <strong>Analise e Desenvolvimento de Sistemas</strong> no UDF. Meus projetos tem motor grafico 3D proprio, back-end sem dependencia externa e mais de 200 testes automatizados.</p>
@@ -338,7 +347,7 @@
   <p class="section-sub fi" data-en="Complete projects I built and shipped — you can visit them right now.">Projetos completos que construi e publiquei — voce pode visitar agora mesmo.</p>
 
   <div class="projects-grid">
-    <article class="proj-card fi fi-d1">
+    <article class="proj-card fi fi-d1" data-proj="brasilia">
       <div class="proj-thumb brasilia-theme">
         <div class="proj-thumb-glow" aria-hidden="true"></div>
         <div class="proj-thumb-inner">
@@ -372,7 +381,7 @@
       </div>
     </article>
 
-    <article class="proj-card fi fi-d2">
+    <article class="proj-card fi fi-d2" data-proj="prospecto">
       <div class="proj-thumb prospecto-theme">
         <div class="proj-thumb-glow" aria-hidden="true"></div>
         <div class="proj-thumb-inner">
@@ -543,8 +552,10 @@
 
 <script src="script.js" defer></script>
 <script src="features.js" defer></script>
+<script src="theme.js" defer></script>
 <script src="command-palette.js" defer></script>
 <script src="enhancements.js" defer></script>
+<script src="projects-modal.js" defer></script>
 <script type="module" src="robot3d.js"></script>
 </body>
 </html>

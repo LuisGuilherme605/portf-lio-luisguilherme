@@ -32,6 +32,7 @@
     }
   }
   const openUrl = (url) => window.open(url, "_blank", "noopener,noreferrer");
+  const openProject = (id) => window.projectModal && window.projectModal.open(id);
 
   /* ---- icones (SVG inline, herdam a cor via currentColor) ---- */
   const svg = (paths) =>
@@ -52,6 +53,8 @@
     link: svg('<path d="M10 14a4 4 0 0 0 6 0l2-2a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-2 2a4 4 0 0 0 6 6l1-1"/>'),
     phone: svg('<path d="M6 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/>'),
     chat: svg('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-5A8 8 0 1 1 21 12z"/>'),
+    info: svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.6" fill="currentColor"/>'),
+    theme: svg('<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>'),
   };
 
   const EMAIL = "lg5104891@gmail.com";
@@ -68,10 +71,13 @@
 
     { cat: ["Projetos", "Projects"], icon: ICON.link, pt: "Brasília 3D — abrir site", en: "Brasília 3D — open site", keys: "brasilia 3d canvas react site demo", run: () => openUrl("https://luisguilherme605.github.io/Brasilia3D/") },
     { cat: ["Projetos", "Projects"], icon: ICON.code, pt: "Brasília 3D — ver código", en: "Brasília 3D — view code", keys: "brasilia 3d github codigo code repo", run: () => openUrl("https://github.com/LuisGuilherme605/Brasilia3D") },
+    { cat: ["Projetos", "Projects"], icon: ICON.info, pt: "Brasília 3D — detalhes", en: "Brasília 3D — details", keys: "brasilia detalhes details info sobre", run: () => openProject("brasilia") },
     { cat: ["Projetos", "Projects"], icon: ICON.link, pt: "Prospecto — abrir demo", en: "Prospecto — open demo", keys: "prospecto lead scoring node demo b2b", run: () => openUrl("https://teste1-k71r.onrender.com") },
     { cat: ["Projetos", "Projects"], icon: ICON.code, pt: "Prospecto — ver código", en: "Prospecto — view code", keys: "prospecto github codigo code repo node", run: () => openUrl("https://github.com/LuisGuilherme605/prospecto-demo") },
+    { cat: ["Projetos", "Projects"], icon: ICON.info, pt: "Prospecto — detalhes", en: "Prospecto — details", keys: "prospecto detalhes details info sobre", run: () => openProject("prospecto") },
 
     { cat: ["Ações", "Actions"], icon: ICON.copy, pt: "Copiar e-mail", en: "Copy e-mail", keys: "copiar email copy mail contato", run: copyEmail },
+    { cat: ["Ações", "Actions"], icon: ICON.theme, pt: "Alternar tema (claro / escuro)", en: "Toggle theme (light / dark)", keys: "tema theme claro escuro dark light modo", run: () => window.themeToggle && window.themeToggle.toggle() },
     { cat: ["Ações", "Actions"], icon: ICON.globe, pt: "Trocar idioma (PT / EN)", en: "Switch language (PT / EN)", keys: "idioma lingua language ingles portugues pt en", run: switchLang },
 
     { cat: ["Links", "Links"], icon: ICON.mail, pt: "E-mail", en: "E-mail", keys: "email mail", run: () => openUrl("mailto:" + EMAIL) },
