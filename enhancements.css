@@ -1,0 +1,377 @@
+/* ========================================
+   ENHANCEMENTS — estilos dos detalhes em JS
+   usa as mesmas variaveis de cor do style.css pra ficar coeso.
+   ======================================== */
+
+/* ----------------------------------------
+   BARRA DE PROGRESSO DE LEITURA
+   ---------------------------------------- */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 200;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 10px rgba(217, 119, 87, 0.5);
+  will-change: transform;
+}
+
+/* ----------------------------------------
+   SCROLLSPY — link ativo na nav
+   ---------------------------------------- */
+.nav-links a {
+  position: relative;
+}
+.nav-links a.active {
+  color: var(--text);
+}
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* ----------------------------------------
+   RELÓGIO DE BRASÍLIA (hero)
+   ---------------------------------------- */
+.hero-eyebrow {
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+}
+.hero-clock-sep {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--accent2);
+  opacity: 0.4;
+}
+.hero-clock {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--accent2);
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------
+   VOLTAR AO TOPO — empilha acima do WhatsApp (lado esquerdo)
+   ---------------------------------------- */
+.to-top {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 5.4rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 95;
+  cursor: pointer;
+  color: var(--muted);
+  background: rgba(20, 18, 16, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s, color 0.2s, border-color 0.2s;
+}
+.to-top svg {
+  width: 20px;
+  height: 20px;
+}
+.to-top.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.to-top:hover {
+  color: var(--accent);
+  border-color: rgba(217, 119, 87, 0.5);
+  transform: translateY(-3px);
+}
+@media (max-width: 480px) {
+  .to-top {
+    left: 1.1rem;
+    bottom: 4.9rem;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ========================================
+   COMMAND PALETTE
+   ======================================== */
+.cmdk {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 14vh 1rem 1rem;
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+.cmdk.open {
+  opacity: 1;
+}
+body.cmdk-lock {
+  overflow: hidden;
+}
+
+.cmdk-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 9, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.cmdk-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  background: linear-gradient(180deg, var(--bg3), var(--bg2));
+  border: 1px solid rgba(217, 119, 87, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transform: translateY(-10px) scale(0.98);
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cmdk.open .cmdk-panel {
+  transform: none;
+}
+
+.cmdk-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+}
+.cmdk-search {
+  display: flex;
+  color: var(--muted);
+}
+.cmdk-search svg {
+  width: 18px;
+  height: 18px;
+}
+.cmdk-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  padding: 0;
+}
+.cmdk-input::placeholder {
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+/* kbd compartilhado (input, rodapé e gatilho) */
+.cmdk kbd,
+.cmdk-trigger kbd {
+  font-family: "Space Mono", monospace;
+  font-size: 0.62rem;
+  line-height: 1;
+  padding: 0.28rem 0.42rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.cmdk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  max-height: 46vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.cmdk-group {
+  font-family: "Space Mono", monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding: 0.8rem 0.7rem 0.35rem;
+}
+.cmdk-group:first-child {
+  padding-top: 0.35rem;
+}
+
+.cmdk-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text);
+  scroll-margin: 0.5rem;
+}
+.cmdk-opt.active {
+  background: rgba(217, 119, 87, 0.12);
+}
+.cmdk-opt-ic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  background: rgba(217, 119, 87, 0.08);
+  border: 1px solid rgba(217, 119, 87, 0.15);
+  color: var(--accent2);
+}
+.cmdk-opt-ic svg {
+  width: 17px;
+  height: 17px;
+}
+.cmdk-opt.active .cmdk-opt-ic {
+  background: rgba(217, 119, 87, 0.16);
+  border-color: rgba(217, 119, 87, 0.4);
+  color: var(--accent);
+}
+.cmdk-opt-label {
+  flex: 1;
+  font-size: 0.9rem;
+}
+.cmdk-opt-arrow {
+  display: flex;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.18s, transform 0.18s;
+}
+.cmdk-opt-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+.cmdk-opt.active .cmdk-opt-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+.cmdk-empty {
+  padding: 2rem 1.1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.cmdk-foot {
+  display: flex;
+  gap: 1.1rem;
+  padding: 0.7rem 1.1rem;
+  border-top: 1px solid var(--border);
+  font-family: "Space Mono", monospace;
+  font-size: 0.64rem;
+  color: var(--muted);
+}
+.cmdk-foot span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.cmdk-foot i {
+  font-style: normal;
+}
+
+/* ----------------------------------------
+   GATILHO NA NAV (⌘K)
+   ---------------------------------------- */
+.cmdk-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.5rem 0.38rem 0.55rem;
+  background: rgba(217, 119, 87, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--muted);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.cmdk-trigger:hover {
+  border-color: rgba(217, 119, 87, 0.45);
+  background: rgba(217, 119, 87, 0.12);
+  color: var(--text);
+}
+.cmdk-trigger-ic {
+  display: flex;
+}
+.cmdk-trigger-ic svg {
+  width: 15px;
+  height: 15px;
+}
+/* esconde o gatilho quando a nav fica apertada (atalho de teclado continua) */
+@media (max-width: 1024px) {
+  .cmdk-trigger {
+    display: none;
+  }
+}
+
+/* ----------------------------------------
+   TOAST (feedback de "copiado")
+   ---------------------------------------- */
+.cmdk-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 2rem;
+  transform: translate(-50%, 16px);
+  z-index: 2100;
+  padding: 0.7rem 1.2rem;
+  background: var(--bg3);
+  border: 1px solid rgba(201, 168, 105, 0.35);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: "Space Mono", monospace;
+  font-size: 0.78rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.cmdk-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ----------------------------------------
+   MENOS MOVIMENTO: corta transforms/transições
+   ---------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .cmdk,
+  .cmdk .cmdk-panel,
+  .to-top,
+  .cmdk-opt-arrow,
+  .cmdk-toast {
+    transition: none;
+  }
+  .read-progress {
+    will-change: auto;
+  }
+}
