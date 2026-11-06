@@ -6,9 +6,12 @@ Meu site pessoal. Fiz pra mostrar meus projetos, o que eu sei fazer e como me en
 
 ## O que tem
 
-- Command palette (Ctrl/Cmd + K): busca pra navegar e agir — pular pra seção, abrir projeto, copiar e-mail, trocar idioma e tema. Teclado completo (setas, Enter, Esc), busca sem acento e ARIA de combobox/listbox
+- Command palette (Ctrl/Cmd + K): busca pra navegar e agir — pular pra seção, abrir projeto, copiar e-mail, trocar idioma e tema, baixar o CV. Teclado completo (setas, Enter, Esc), busca sem acento e ARIA de combobox/listbox
 - Tema claro/escuro: lembra a escolha, detecta a preferência do sistema e aplica antes da página pintar (sem flash, com hash no CSP)
-- Modal de detalhes em cada projeto, com foco preso e fechamento por Esc
+- Telas reais dos projetos (capturas ao vivo) nos cards e nos modais
+- Modal de cada projeto em formato case study: desafio → decisão técnica → resultado
+- Seção "Por baixo do capô" explicando como o motor 3D foi feito em Canvas sem WebGL
+- Currículo em PDF baixável (botão no hero e na command palette)
 - Robô 3D feito com Three.js que segue o cursor (só desktop)
 - Troca de idioma PT/EN, detecta o idioma do navegador e lembra a escolha
 - Barra de progresso de leitura no topo da página

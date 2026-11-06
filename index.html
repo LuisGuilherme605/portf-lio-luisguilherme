@@ -144,6 +144,7 @@
   <div class="hero-ctas">
     <a href="#projetos" class="btn-glow" data-en="See my projects &rarr;">Ver meus projetos &rarr;</a>
     <a href="#contato" class="btn-ghost" data-en="Get in touch">Entre em contato</a>
+    <a href="cv-luis-guilherme.pdf" class="btn-ghost" download="Luis-Guilherme-CV.pdf" data-en='<svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>Download CV'><svg class="btn-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>Baixar CV</a>
   </div>
 
 </section>
@@ -348,17 +349,7 @@
   <div class="projects-grid">
     <article class="proj-card fi fi-d1" data-proj="brasilia">
       <div class="proj-thumb brasilia-theme">
-        <div class="proj-thumb-glow" aria-hidden="true"></div>
-        <div class="proj-thumb-inner">
-          <svg class="proj-thumb-icon" viewBox="0 0 68 52" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="4" y1="44" x2="64" y2="44"/>
-            <path d="M7 30 a10 10 0 0 0 20 0"/>
-            <path d="M41 30 a10 10 0 0 1 20 0"/>
-            <rect x="31" y="6" width="2.6" height="38" rx="1"/>
-            <rect x="35.4" y="6" width="2.6" height="38" rx="1"/>
-          </svg>
-          <div class="proj-thumb-name">brasilia3d</div>
-        </div>
+        <img class="proj-shot" src="proj-brasilia.jpg" width="1200" height="600" loading="lazy" decoding="async" alt="Tela do Brasília 3D: maquete 3D do Plano Piloto com os monumentos etiquetados">
         <div class="proj-badge">Live</div>
       </div>
       <div class="proj-body">
@@ -382,22 +373,7 @@
 
     <article class="proj-card fi fi-d2" data-proj="prospecto">
       <div class="proj-thumb prospecto-theme">
-        <div class="proj-thumb-glow" aria-hidden="true"></div>
-        <div class="proj-thumb-inner">
-          <svg class="proj-thumb-icon" viewBox="0 0 68 52" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="8" y="6" width="52" height="40" rx="4"/>
-            <line x1="8" y1="16" x2="60" y2="16"/>
-            <circle cx="16" cy="11" r="2"/>
-            <circle cx="23" cy="11" r="2"/>
-            <circle cx="30" cy="11" r="2"/>
-            <rect x="14" y="22" width="18" height="6" rx="1.5"/>
-            <rect x="14" y="32" width="14" height="6" rx="1.5"/>
-            <rect x="38" y="22" width="16" height="16" rx="2"/>
-            <line x1="42" y1="28" x2="50" y2="28"/>
-            <line x1="42" y1="32" x2="48" y2="32"/>
-          </svg>
-          <div class="proj-thumb-name">prospecto</div>
-        </div>
+        <img class="proj-shot" src="proj-prospecto.jpg" width="1200" height="600" loading="lazy" decoding="async" alt="Tela do Prospecto: painel de vendas B2B com KPIs, distribuição por tier, funil e previsão de pipeline">
         <div class="proj-badge">Live</div>
       </div>
       <div class="proj-body">
@@ -418,6 +394,45 @@
         </div>
       </div>
     </article>
+  </div>
+</section>
+
+<hr class="sep">
+
+<!-- Making-of: motor 3D -->
+<section class="content" id="making">
+  <div class="section-eyebrow fi" data-en="Under the hood">Por baixo do capo</div>
+  <h2 class="section-h fi" data-en="3D in the browser,<br>no WebGL">3D no navegador,<br>sem WebGL</h2>
+  <p class="section-sub fi" data-en="The Brasília 3D model is drawn with the plain Canvas 2D API — which knows nothing about depth. So I built the 3D by hand, in three steps:">O Brasilia 3D desenha a maquete da cidade usando so o Canvas 2D — que nao entende profundidade. Entao eu implementei o 3D na mao, em tres passos:</p>
+
+  <div class="making-layout">
+    <figure class="making-figure fi">
+      <img src="proj-brasilia.jpg" width="1200" height="600" loading="lazy" decoding="async" alt="Maquete 3D do Plano Piloto giravel, feita em Canvas 2D">
+      <figcaption class="making-cap" data-en="Spinnable Plano Piloto model — pure Canvas 2D.">Maquete do Plano Piloto giravel — Canvas 2D puro.</figcaption>
+    </figure>
+    <ol class="making-steps">
+      <li class="fi fi-d1">
+        <span class="making-n" aria-hidden="true">01</span>
+        <div>
+          <h3 data-en="Perspective projection">Projecao em perspectiva</h3>
+          <p data-en="Each 3D point (x, y, z) becomes a 2D point on screen. The farther away on the Z axis, the closer to the center and the smaller it's drawn — that's what creates the sense of depth.">Cada ponto 3D <code>(x, y, z)</code> vira um ponto 2D na tela. Quanto mais longe no eixo Z, mais perto do centro e menor ele e desenhado — e isso que cria a sensacao de profundidade.</p>
+        </div>
+      </li>
+      <li class="fi fi-d2">
+        <span class="making-n" aria-hidden="true">02</span>
+        <div>
+          <h3 data-en="Vertical-axis rotation">Rotacao no eixo vertical</h3>
+          <p data-en="Dragging the mouse spins the city. Before projecting, I recompute each point's X and Z with the sine and cosine of the angle — the whole model turns in real time.">Arrastar o mouse gira a cidade. Antes de projetar, eu recalculo o X e o Z de cada ponto com <code>sin</code> e <code>cos</code> do angulo — a maquete inteira vira em tempo real.</p>
+        </div>
+      </li>
+      <li class="fi fi-d3">
+        <span class="making-n" aria-hidden="true">03</span>
+        <div>
+          <h3 data-en="Painter's algorithm">Algoritmo do pintor</h3>
+          <p data-en="Canvas has no depth buffer, so I sort the faces from farthest to nearest and draw in that order. The back ones get covered by the front ones — depth without a z-buffer.">O Canvas nao tem buffer de profundidade, entao eu ordeno as faces da mais distante pra mais proxima e desenho nessa ordem. As de tras ficam cobertas pelas da frente — profundidade sem z-buffer.</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 

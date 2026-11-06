@@ -55,6 +55,8 @@
     chat: svg('<path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-5A8 8 0 1 1 21 12z"/>'),
     info: svg('<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.6" fill="currentColor"/>'),
     theme: svg('<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>'),
+    download: svg('<path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M5 21h14"/>'),
+    cube: svg('<path d="M12 3l9 5v8l-9 5-9-5V8z"/><path d="M12 3v18"/><path d="M3 8l9 5 9-5"/>'),
   };
 
   const EMAIL = "lg5104891@gmail.com";
@@ -66,6 +68,7 @@
     { cat: ["Navegar", "Go to"], icon: ICON.spark, pt: "Habilidades", en: "Skills", keys: "habilidades skills competencias", run: () => go("#habilidades") },
     { cat: ["Navegar", "Go to"], icon: ICON.stack, pt: "Stack", en: "Stack", keys: "stack tecnologias ferramentas tools", run: () => go("#stack") },
     { cat: ["Navegar", "Go to"], icon: ICON.grid, pt: "Projetos", en: "Projects", keys: "projetos projects trabalhos portfolio", run: () => go("#projetos") },
+    { cat: ["Navegar", "Go to"], icon: ICON.cube, pt: "Por baixo do capô", en: "Under the hood", keys: "capo making of motor 3d canvas webgl tecnico under hood engine", run: () => go("#making") },
     { cat: ["Navegar", "Go to"], icon: ICON.cap, pt: "Formação", en: "Education", keys: "formacao educacao education cursos", run: () => go("#formacao") },
     { cat: ["Navegar", "Go to"], icon: ICON.mail, pt: "Contato", en: "Contact", keys: "contato contact falar", run: () => go("#contato") },
 
@@ -76,6 +79,7 @@
     { cat: ["Projetos", "Projects"], icon: ICON.code, pt: "Prospecto — ver código", en: "Prospecto — view code", keys: "prospecto github codigo code repo node", run: () => openUrl("https://github.com/LuisGuilherme605/prospecto-demo") },
     { cat: ["Projetos", "Projects"], icon: ICON.info, pt: "Prospecto — detalhes", en: "Prospecto — details", keys: "prospecto detalhes details info sobre", run: () => openProject("prospecto") },
 
+    { cat: ["Ações", "Actions"], icon: ICON.download, pt: "Baixar CV (PDF)", en: "Download CV (PDF)", keys: "cv curriculo resume download baixar pdf", run: downloadCV },
     { cat: ["Ações", "Actions"], icon: ICON.copy, pt: "Copiar e-mail", en: "Copy e-mail", keys: "copiar email copy mail contato", run: copyEmail },
     { cat: ["Ações", "Actions"], icon: ICON.theme, pt: "Alternar tema (claro / escuro)", en: "Toggle theme (light / dark)", keys: "tema theme claro escuro dark light modo", run: () => window.themeToggle && window.themeToggle.toggle() },
     { cat: ["Ações", "Actions"], icon: ICON.globe, pt: "Trocar idioma (PT / EN)", en: "Switch language (PT / EN)", keys: "idioma lingua language ingles portugues pt en", run: switchLang },
@@ -90,6 +94,15 @@
   function switchLang() {
     const btn = document.getElementById("langToggle") || document.getElementById("langToggleMobile");
     if (btn) btn.click();
+  }
+
+  function downloadCV() {
+    const a = document.createElement("a");
+    a.href = "cv-luis-guilherme.pdf";
+    a.download = "Luis-Guilherme-CV.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
   }
 
   function copyEmail() {
