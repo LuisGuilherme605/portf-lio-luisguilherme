@@ -156,6 +156,7 @@
   root.id = "cmdk";
   root.setAttribute("role", "dialog");
   root.setAttribute("aria-modal", "true");
+  root.setAttribute("aria-label", "Paleta de comandos");
   root.hidden = true;
   root.innerHTML =
     '<div class="cmdk-backdrop" data-close></div>' +
@@ -164,7 +165,7 @@
     '    <span class="cmdk-search" aria-hidden="true">' + ICON.grid + "</span>" +
     '    <input class="cmdk-input" type="text" role="combobox" aria-expanded="true"' +
     '           aria-controls="cmdk-list" aria-autocomplete="list" autocomplete="off"' +
-    '           spellcheck="false" />' +
+    '           spellcheck="false" aria-label="Buscar no portfólio" />' +
     '    <kbd class="cmdk-esc">esc</kbd>' +
     "  </div>" +
     '  <ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>' +

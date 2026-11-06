@@ -69,7 +69,7 @@
   root.className = "pm";
   root.setAttribute("role", "dialog");
   root.setAttribute("aria-modal", "true");
-  root.setAttribute("aria-labelledby", "pm-title");
+  root.setAttribute("aria-label", "Detalhes do projeto");
   root.hidden = true;
   root.innerHTML =
     '<div class="pm-backdrop" data-close></div>' +
@@ -122,6 +122,7 @@
     elShot.alt = d.shotAlt[i];
     elType.textContent = d.type[i];
     elTitle.textContent = d.title[i];
+    root.setAttribute("aria-label", d.title[i]);
     elDesc.textContent = d.desc[i];
 
     elSections.innerHTML = "";

@@ -583,12 +583,12 @@ body.cmdk-lock {
 }
 .pm-link--primary {
   background: var(--accent);
-  color: #fff;
+  color: #04171b;
   border-color: var(--accent);
 }
 .pm-link--primary:hover {
-  background: #119aa8;
-  color: #fff;
+  background: #2fd4de;
+  color: #04171b;
   transform: translateY(-2px);
 }
 
