@@ -21,8 +21,8 @@ import * as THREE from "three";
     H = 140;
 
   // cores do site
-  var WARM = 0xd97757;
-  var GOLD = 0xc9a869;
+  var WARM = 0x18bccb;
+  var GOLD = 0x4b8bf4;
 
   var renderer;
   try {

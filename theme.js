@@ -10,7 +10,7 @@
   const STORE = "theme";
   const root = document.documentElement;
   const meta = document.querySelector('meta[name="theme-color"]');
-  const META_COLOR = { dark: "#07070f", light: "#f6f1ea" };
+  const META_COLOR = { dark: "#07090c", light: "#eef2f6" };
   const buttons = [];
 
   const current = () => (root.getAttribute("data-theme") === "light" ? "light" : "dark");

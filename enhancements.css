@@ -16,7 +16,7 @@
   transform: scaleX(0);
   transform-origin: left center;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
-  box-shadow: 0 0 10px rgba(217, 119, 87, 0.5);
+  box-shadow: 0 0 10px rgba(24, 188, 203, 0.5);
   will-change: transform;
 }
 
@@ -99,7 +99,7 @@
 }
 .to-top:hover {
   color: var(--accent);
-  border-color: rgba(217, 119, 87, 0.5);
+  border-color: rgba(24, 188, 203, 0.5);
   transform: translateY(-3px);
 }
 @media (max-width: 480px) {
@@ -145,7 +145,7 @@ body.cmdk-lock {
   width: 100%;
   max-width: 560px;
   background: linear-gradient(180deg, var(--bg3), var(--bg2));
-  border: 1px solid rgba(217, 119, 87, 0.22);
+  border: 1px solid rgba(24, 188, 203, 0.22);
   border-radius: 16px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(0, 0, 0, 0.3);
   overflow: hidden;
@@ -232,7 +232,7 @@ body.cmdk-lock {
   scroll-margin: 0.5rem;
 }
 .cmdk-opt.active {
-  background: rgba(217, 119, 87, 0.12);
+  background: rgba(24, 188, 203, 0.12);
 }
 .cmdk-opt-ic {
   display: flex;
@@ -242,8 +242,8 @@ body.cmdk-lock {
   height: 34px;
   flex-shrink: 0;
   border-radius: 9px;
-  background: rgba(217, 119, 87, 0.08);
-  border: 1px solid rgba(217, 119, 87, 0.15);
+  background: rgba(24, 188, 203, 0.08);
+  border: 1px solid rgba(24, 188, 203, 0.15);
   color: var(--accent2);
 }
 .cmdk-opt-ic svg {
@@ -251,8 +251,8 @@ body.cmdk-lock {
   height: 17px;
 }
 .cmdk-opt.active .cmdk-opt-ic {
-  background: rgba(217, 119, 87, 0.16);
-  border-color: rgba(217, 119, 87, 0.4);
+  background: rgba(24, 188, 203, 0.16);
+  border-color: rgba(24, 188, 203, 0.4);
   color: var(--accent);
 }
 .cmdk-opt-label {
@@ -308,7 +308,7 @@ body.cmdk-lock {
   align-items: center;
   gap: 0.45rem;
   padding: 0.38rem 0.5rem 0.38rem 0.55rem;
-  background: rgba(217, 119, 87, 0.06);
+  background: rgba(24, 188, 203, 0.06);
   border: 1px solid var(--border);
   border-radius: 8px;
   cursor: pointer;
@@ -316,8 +316,8 @@ body.cmdk-lock {
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
 .cmdk-trigger:hover {
-  border-color: rgba(217, 119, 87, 0.45);
-  background: rgba(217, 119, 87, 0.12);
+  border-color: rgba(24, 188, 203, 0.45);
+  background: rgba(24, 188, 203, 0.12);
   color: var(--text);
 }
 .cmdk-trigger-ic {
@@ -345,7 +345,7 @@ body.cmdk-lock {
   z-index: 2100;
   padding: 0.7rem 1.2rem;
   background: var(--bg3);
-  border: 1px solid rgba(201, 168, 105, 0.35);
+  border: 1px solid rgba(75, 139, 244, 0.35);
   border-radius: 10px;
   color: var(--text);
   font-family: "Space Mono", monospace;
@@ -381,16 +381,16 @@ body.cmdk-lock {
    ======================================== */
 .about-avatar {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1.6rem;
-  background: linear-gradient(145deg, rgba(217, 119, 87, 0.16), rgba(201, 168, 105, 0.1)), var(--bg2);
+  background: linear-gradient(145deg, rgba(24, 188, 203, 0.16), rgba(75, 139, 244, 0.1)), var(--bg2);
   border: 1px solid var(--border);
-  box-shadow: 0 0 0 4px rgba(217, 119, 87, 0.06), inset 0 0 20px rgba(217, 119, 87, 0.08);
+  box-shadow: 0 0 0 4px rgba(24, 188, 203, 0.06), inset 0 0 20px rgba(24, 188, 203, 0.08);
 }
 .about-avatar-mono {
   font-family: "Sora", sans-serif;
@@ -463,7 +463,7 @@ body.cmdk-lock {
   max-height: 88vh;
   overflow-y: auto;
   background: linear-gradient(180deg, var(--bg3), var(--bg2));
-  border: 1px solid rgba(217, 119, 87, 0.22);
+  border: 1px solid rgba(24, 188, 203, 0.22);
   border-radius: 18px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
   padding: 2rem;
@@ -491,7 +491,7 @@ body.cmdk-lock {
 }
 .pm-close:hover {
   color: var(--text);
-  border-color: rgba(217, 119, 87, 0.45);
+  border-color: rgba(24, 188, 203, 0.45);
 }
 .pm-close svg {
   width: 18px;
@@ -571,15 +571,15 @@ body.cmdk-lock {
   text-decoration: none;
   padding: 0.7rem 1.2rem;
   border-radius: 8px;
-  border: 1px solid rgba(217, 119, 87, 0.3);
+  border: 1px solid rgba(24, 188, 203, 0.3);
   color: var(--accent);
-  background: rgba(217, 119, 87, 0.06);
+  background: rgba(24, 188, 203, 0.06);
   transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
 }
 .pm-link:hover {
-  border-color: rgba(201, 168, 105, 0.5);
+  border-color: rgba(75, 139, 244, 0.5);
   color: var(--accent2);
-  background: rgba(201, 168, 105, 0.06);
+  background: rgba(75, 139, 244, 0.06);
 }
 .pm-link--primary {
   background: var(--accent);
@@ -587,7 +587,7 @@ body.cmdk-lock {
   border-color: var(--accent);
 }
 .pm-link--primary:hover {
-  background: #c86848;
+  background: #119aa8;
   color: #fff;
   transform: translateY(-2px);
 }

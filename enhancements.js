@@ -170,9 +170,9 @@
   (function consoleSignature() {
     try {
       const big =
-        "color:#d97757;font-size:15px;font-weight:700;font-family:monospace;";
-      const soft = "color:#8a8175;font-size:12px;font-family:monospace;";
-      const warm = "color:#c9a869;font-size:12px;font-family:monospace;";
+        "color:#18bccb;font-size:15px;font-weight:700;font-family:monospace;";
+      const soft = "color:#869099;font-size:12px;font-family:monospace;";
+      const warm = "color:#4b8bf4;font-size:12px;font-family:monospace;";
       console.log("%cLuis Guilherme — LG.dev", big);
       console.log(
         "%cValeu por abrir o console 👋  Curtiu o site? Tenta o atalho %cCtrl/Cmd + K%c.",
