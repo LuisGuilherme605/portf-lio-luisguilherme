@@ -159,7 +159,17 @@
       clock.textContent = fmt.format(new Date()) + " BRT";
     }
     tick();
-    setInterval(tick, 15000); // a cada 15s já mantém o minuto certo
+    let timer = setInterval(tick, 15000); // a cada 15s já mantém o minuto certo
+    // pausa com a aba oculta (consistente com o robô), retoma ao voltar
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearInterval(timer);
+        timer = null;
+      } else if (timer === null) {
+        tick();
+        timer = setInterval(tick, 15000);
+      }
+    });
   })();
 
   /* ----------------------------------------

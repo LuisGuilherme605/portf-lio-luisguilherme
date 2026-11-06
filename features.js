@@ -39,6 +39,10 @@
     translate(en ? "en" : "pt");
     document.title = en ? titleEn : titlePt;
     toggles.forEach((btn) => btn.setAttribute("aria-pressed", String(en)));
+    // avisa os outros modulos (tema, palette, modal) pra sincronizarem textos/aria
+    try {
+      document.dispatchEvent(new CustomEvent("langchange", { detail: en ? "en" : "pt" }));
+    } catch (e) {}
   }
 
   // Idioma inicial: escolha salva, senao detecta o navegador (PT por padrao)

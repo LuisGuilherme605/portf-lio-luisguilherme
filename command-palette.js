@@ -5,6 +5,7 @@
    - teclado completo: setas, Enter, Esc, e foco preso enquanto aberto
    - semantica ARIA de combobox + listbox pra leitor de tela
    - bilingue: le o idioma atual do site (pt-BR / en)
+   - o ciclo de vida do dialogo (abrir/fechar/foco/Esc) vem de createDialog
    ======================================== */
 (function () {
   "use strict";
@@ -19,11 +20,11 @@
 
   // reaproveita o scroll suave do site quando existe; senao faz o proprio
   function go(hash) {
-    const target = hash === "#top" ? document.body : document.querySelector(hash);
     if (hash === "#top") {
       window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
       return;
     }
+    const target = document.querySelector(hash);
     if (!target) return;
     if (typeof window.scrollToTarget === "function") {
       window.scrollToTarget(target);
@@ -32,6 +33,7 @@
     }
   }
   const openUrl = (url) => window.open(url, "_blank", "noopener,noreferrer");
+  const goHref = (url) => { window.location.href = url; }; // mailto:/tel: sem aba em branco
   const openProject = (id) => window.projectModal && window.projectModal.open(id);
 
   /* ---- icones (SVG inline, herdam a cor via currentColor) ---- */
@@ -84,9 +86,9 @@
     { cat: ["Ações", "Actions"], icon: ICON.theme, pt: "Alternar tema (claro / escuro)", en: "Toggle theme (light / dark)", keys: "tema theme claro escuro dark light modo", run: () => window.themeToggle && window.themeToggle.toggle() },
     { cat: ["Ações", "Actions"], icon: ICON.globe, pt: "Trocar idioma (PT / EN)", en: "Switch language (PT / EN)", keys: "idioma lingua language ingles portugues pt en", run: switchLang },
 
-    { cat: ["Links", "Links"], icon: ICON.mail, pt: "E-mail", en: "E-mail", keys: "email mail", run: () => openUrl("mailto:" + EMAIL) },
+    { cat: ["Links", "Links"], icon: ICON.mail, pt: "E-mail", en: "E-mail", keys: "email mail", run: () => goHref("mailto:" + EMAIL) },
     { cat: ["Links", "Links"], icon: ICON.chat, pt: "WhatsApp", en: "WhatsApp", keys: "whatsapp zap telefone mensagem", run: () => openUrl("https://wa.me/5561998730501?text=Ol%C3%A1%20Luis%2C%20vi%20seu%20portf%C3%B3lio%21") },
-    { cat: ["Links", "Links"], icon: ICON.phone, pt: "Telefone", en: "Phone", keys: "telefone phone ligar celular", run: () => openUrl("tel:+5561998730501") },
+    { cat: ["Links", "Links"], icon: ICON.phone, pt: "Telefone", en: "Phone", keys: "telefone phone ligar celular", run: () => goHref("tel:+5561998730501") },
     { cat: ["Links", "Links"], icon: ICON.code, pt: "GitHub", en: "GitHub", keys: "github git codigo repositorios", run: () => openUrl("https://github.com/LuisGuilherme605") },
     { cat: ["Links", "Links"], icon: ICON.link, pt: "LinkedIn", en: "LinkedIn", keys: "linkedin rede profissional vaga", run: () => openUrl("https://www.linkedin.com/in/luis-guilherme-126072360") },
   ];
@@ -169,7 +171,7 @@
     '    <kbd class="cmdk-esc">esc</kbd>' +
     "  </div>" +
     '  <ul class="cmdk-list" id="cmdk-list" role="listbox"></ul>' +
-    '  <p class="cmdk-empty" hidden></p>' +
+    '  <p class="cmdk-empty" role="status" aria-live="polite" hidden></p>' +
     '  <div class="cmdk-foot" aria-hidden="true">' +
     '    <span><kbd>↑</kbd><kbd>↓</kbd> <i class="k-nav"></i></span>' +
     '    <span><kbd>↵</kbd> <i class="k-open"></i></span>' +
@@ -178,22 +180,15 @@
     "</div>";
   document.body.appendChild(root);
 
-  const panel = root.querySelector(".cmdk-panel");
   const input = root.querySelector(".cmdk-input");
   const list = root.querySelector("#cmdk-list");
   const empty = root.querySelector(".cmdk-empty");
 
   let visible = [];       // acoes atualmente filtradas, em ordem
   let activeIndex = 0;    // item destacado
-  let lastFocus = null;   // devolve o foco ao fechar
-  let isOpen = false;
 
-  function labelOf(a) {
-    return isEN() ? a.en : a.pt;
-  }
-  function catOf(a) {
-    return isEN() ? a.cat[1] : a.cat[0];
-  }
+  const labelOf = (a) => (isEN() ? a.en : a.pt);
+  const catOf = (a) => (isEN() ? a.cat[1] : a.cat[0]);
 
   function render(query) {
     const q = norm(query || "").trim();
@@ -205,6 +200,7 @@
       return words.every((w) => hay.indexOf(w) !== -1);
     });
 
+    input.setAttribute("aria-expanded", String(visible.length > 0));
     list.innerHTML = "";
     if (!visible.length) {
       empty.hidden = false;
@@ -271,71 +267,47 @@
   function runAt(i) {
     const a = visible[i];
     if (!a) return;
-    close();
+    dlg.close();
     // deixa o fechamento acontecer antes de navegar/abrir
     requestAnimationFrame(() => a.run());
   }
 
-  /* ---- abrir / fechar ---- */
-  function open() {
-    if (isOpen) return;
-    isOpen = true;
-    lastFocus = document.activeElement;
-    // textos que dependem do idioma atual
-    input.placeholder = t("Buscar seções, projetos, ações…", "Search sections, projects, actions…");
-    input.setAttribute("aria-label", t("Buscar no portfólio", "Search the portfolio"));
-    root.setAttribute("aria-label", t("Paleta de comandos", "Command palette"));
-    root.querySelector(".k-nav").textContent = t("navegar", "navigate");
-    root.querySelector(".k-open").textContent = t("abrir", "open");
-    root.querySelector(".k-close").textContent = t("fechar", "close");
-    input.value = "";
-    root.hidden = false;
-    document.body.classList.add("cmdk-lock");
-    render("");
-    requestAnimationFrame(() => {
-      root.classList.add("open");
-      input.focus();
-    });
-  }
+  /* ---- dialogo (abrir/fechar/foco/Esc/Tab/backdrop vem de createDialog) ---- */
+  const dlg = window.createDialog(root, {
+    lockClass: "scroll-lock",
+    animMs: 160,
+    focusTarget: () => input,
+    onBeforeOpen: function () {
+      input.placeholder = t("Buscar seções, projetos, ações…", "Search sections, projects, actions…");
+      input.setAttribute("aria-label", t("Buscar no portfólio", "Search the portfolio"));
+      root.setAttribute("aria-label", t("Paleta de comandos", "Command palette"));
+      root.querySelector(".k-nav").textContent = t("navegar", "navigate");
+      root.querySelector(".k-open").textContent = t("abrir", "open");
+      root.querySelector(".k-close").textContent = t("fechar", "close");
+      input.value = "";
+      render("");
+    },
+  });
 
-  function close() {
-    if (!isOpen) return;
-    isOpen = false;
-    root.classList.remove("open");
-    document.body.classList.remove("cmdk-lock");
-    const hide = () => { root.hidden = true; };
-    if (reduce) hide();
-    else setTimeout(hide, 160);
-    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
-  }
-
-  function toggle() {
-    isOpen ? close() : open();
-  }
-
-  /* ---- teclado ---- */
+  /* ---- teclado proprio da lista (setas, Enter, Home, End) ---- */
   // atalho global Ctrl/Cmd+K, e "/" como atalho rapido (fora de campos de texto)
   document.addEventListener("keydown", (e) => {
     const k = e.key.toLowerCase();
     if ((e.ctrlKey || e.metaKey) && k === "k") {
       e.preventDefault();
-      toggle();
+      dlg.toggle();
       return;
     }
-    if (!isOpen && k === "/" && !/^(input|textarea|select)$/i.test(document.activeElement.tagName)) {
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (!dlg.isOpen && k === "/" && !/^(input|textarea|select)$/i.test(tag || "")) {
       e.preventDefault();
-      open();
+      dlg.open();
     }
   });
 
-  // navegacao dentro da paleta
   root.addEventListener("keydown", (e) => {
-    if (!isOpen) return;
+    if (!dlg.isOpen) return;
     switch (e.key) {
-      case "Escape":
-        e.preventDefault();
-        close();
-        break;
       case "ArrowDown":
         e.preventDefault();
         move(1);
@@ -356,40 +328,38 @@
         e.preventDefault();
         runAt(activeIndex);
         break;
-      case "Tab":
-        // foco preso: o unico campo focavel e o input, entao so cancela o Tab
-        e.preventDefault();
-        input.focus();
-        break;
     }
   });
 
   input.addEventListener("input", () => render(input.value));
 
-  // clique fora (backdrop) fecha
-  root.addEventListener("click", (e) => {
-    if (e.target.hasAttribute("data-close")) close();
-  });
-
   /* ---- gatilho visivel na navegacao (desktop) ---- */
+  const mac = /mac|iphone|ipad/i.test(navigator.platform || navigator.userAgent);
+  const trigger = document.createElement("button");
   (function injectTrigger() {
     const nav = document.querySelector("nav");
-    const langBtn = document.getElementById("langToggle");
     if (!nav) return;
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "cmdk-trigger";
-    btn.setAttribute("aria-haspopup", "dialog");
-    btn.setAttribute("aria-label", "Abrir busca rápida (Ctrl K)");
-    const mac = /mac|iphone|ipad/i.test(navigator.platform || navigator.userAgent);
-    btn.innerHTML =
+    trigger.type = "button";
+    trigger.className = "cmdk-trigger";
+    trigger.setAttribute("aria-haspopup", "dialog");
+    trigger.innerHTML =
       '<span class="cmdk-trigger-ic" aria-hidden="true">' + ICON.grid + "</span>" +
       '<kbd aria-hidden="true">' + (mac ? "⌘" : "Ctrl") + " K</kbd>";
-    btn.addEventListener("click", open);
-    if (langBtn) nav.insertBefore(btn, langBtn);
-    else nav.appendChild(btn);
+    trigger.addEventListener("click", () => dlg.open());
+    const langBtn = document.getElementById("langToggle");
+    if (langBtn) nav.insertBefore(trigger, langBtn);
+    else nav.appendChild(trigger);
+    updateTriggerLabel();
   })();
 
+  function updateTriggerLabel() {
+    const combo = mac ? "Cmd K" : "Ctrl K";
+    trigger.setAttribute("aria-label", t("Abrir busca rápida (" + combo + ")", "Open quick search (" + combo + ")"));
+  }
+
+  // mantem o aria-label do gatilho no idioma atual
+  document.addEventListener("langchange", updateTriggerLabel);
+
   // expoe pra quem quiser abrir por codigo (ex.: outros scripts)
-  window.commandPalette = { open, close, toggle };
+  window.commandPalette = { open: dlg.open, close: dlg.close, toggle: dlg.toggle };
 })();

@@ -128,8 +128,15 @@
 .cmdk.open {
   opacity: 1;
 }
-body.cmdk-lock {
+body.scroll-lock {
   overflow: hidden;
+}
+/* CRÍTICO: o .cmdk/.pm usam display:flex, que anula o atributo [hidden].
+   sem isto, o overlay fechado (opacity:0) fica por cima da página e
+   engole todos os cliques do mouse. [hidden] precisa virar display:none. */
+.cmdk[hidden],
+.pm[hidden] {
+  display: none;
 }
 
 .cmdk-backdrop {
@@ -472,6 +479,10 @@ body.cmdk-lock {
 }
 .pm.open .pm-panel {
   transform: none;
+}
+/* o painel recebe foco (tabindex=-1) pra dar scroll pelo teclado — sem anel no container */
+.pm-panel:focus {
+  outline: none;
 }
 .pm-close {
   position: absolute;

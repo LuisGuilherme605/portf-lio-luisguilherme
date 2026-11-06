@@ -2,13 +2,14 @@
    MODAL DE DETALHES DOS PROJETOS (case study)
    - abre um diálogo com tela real + narrativa: desafio, decisão técnica, resultado
    - os dados saem do que o projeto realmente é, num formato mais rico
-   - acessível: role=dialog, foco preso, Esc fecha, devolve o foco ao abrir
+   - acessível: role=dialog, foco no painel (dá pra rolar o texto pelo teclado),
+     foco preso, Esc fecha, devolve o foco ao abrir
+   - o ciclo de vida do dialogo vem de createDialog
    - bilíngue (lê o idioma atual) e injeta o botão "Detalhes" em cada card
    ======================================== */
 (function () {
   "use strict";
 
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isEN = () => document.documentElement.lang === "en";
 
   const DATA = {
@@ -73,7 +74,7 @@
   root.hidden = true;
   root.innerHTML =
     '<div class="pm-backdrop" data-close></div>' +
-    '<div class="pm-panel" role="document">' +
+    '<div class="pm-panel" role="document" tabindex="-1">' +
     '  <button type="button" class="pm-close" aria-label="Fechar">' +
     '    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>' +
     "  </button>" +
@@ -97,18 +98,21 @@
   const elTech = root.querySelector(".pm-tech");
   const elLinks = root.querySelector(".pm-links");
 
-  let lastFocus = null;
-  let isOpen = false;
-  const FOCUSABLE = "a[href], button:not([disabled])";
+  const dlg = window.createDialog(root, {
+    lockClass: "scroll-lock",
+    animMs: 180,
+    focusTarget: () => panel,
+  });
+  closeBtn.addEventListener("click", dlg.close);
 
   function section(labelPt, labelEn, textPt, textEn) {
-    const i = isEN() ? 1 : 0;
+    const en = isEN();
     const h = document.createElement("h3");
     h.className = "pm-h";
-    h.textContent = isEN() ? labelEn : labelPt;
+    h.textContent = en ? labelEn : labelPt;
     const p = document.createElement("p");
     p.className = "pm-text";
-    p.textContent = i ? textEn : textPt;
+    p.textContent = en ? textEn : textPt;
     elSections.appendChild(h);
     elSections.appendChild(p);
   }
@@ -157,57 +161,17 @@
 
   function open(id) {
     if (!DATA[id]) return;
-    lastFocus = document.activeElement;
     fill(id);
     panel.scrollTop = 0;
-    root.hidden = false;
-    document.body.classList.add("cmdk-lock");
-    requestAnimationFrame(() => {
-      root.classList.add("open");
-      closeBtn.focus();
-    });
-    isOpen = true;
+    dlg.open();
   }
-
-  function close() {
-    if (!isOpen) return;
-    isOpen = false;
-    root.classList.remove("open");
-    document.body.classList.remove("cmdk-lock");
-    const hide = () => { root.hidden = true; };
-    if (reduce) hide();
-    else setTimeout(hide, 180);
-    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
-  }
-
-  root.addEventListener("click", (e) => {
-    if (e.target.hasAttribute("data-close")) close();
-  });
-  closeBtn.addEventListener("click", close);
-
-  root.addEventListener("keydown", (e) => {
-    if (!isOpen) return;
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-      return;
-    }
-    if (e.key === "Tab") {
-      const items = root.querySelectorAll(FOCUSABLE);
-      if (!items.length) return;
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
-    }
-  });
 
   /* ---- injeta o botão "Detalhes" em cada card ---- */
+  const detailBtns = []; // { btn, card } — pra manter o aria-label no idioma certo
+  function detailLabel(card) {
+    const name = card.querySelector(".proj-name");
+    return (isEN() ? "Details about " : "Detalhes de ") + (name ? name.textContent : "");
+  }
   document.querySelectorAll(".proj-card[data-proj]").forEach((card) => {
     const id = card.getAttribute("data-proj");
     const row = card.querySelector(".proj-links-row");
@@ -216,11 +180,7 @@
     btn.type = "button";
     btn.className = "proj-link proj-link--details";
     btn.setAttribute("aria-haspopup", "dialog");
-    const label = card.querySelector(".proj-name");
-    btn.setAttribute(
-      "aria-label",
-      (isEN() ? "Details about " : "Detalhes de ") + (label ? label.textContent : id)
-    );
+    btn.setAttribute("aria-label", detailLabel(card));
     btn.innerHTML =
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.6" r="0.6" fill="currentColor"/></svg>';
     const span = document.createElement("span");
@@ -230,7 +190,13 @@
     btn.appendChild(span);
     btn.addEventListener("click", () => open(id));
     row.insertBefore(btn, row.firstChild);
+    detailBtns.push({ btn: btn, card: card });
   });
 
-  window.projectModal = { open, close };
+  // mantem o aria-label dos botoes "Detalhes" no idioma atual
+  document.addEventListener("langchange", () => {
+    detailBtns.forEach((d) => d.btn.setAttribute("aria-label", detailLabel(d.card)));
+  });
+
+  window.projectModal = { open: open, close: dlg.close };
 })();

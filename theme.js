@@ -88,11 +88,19 @@
   sync();
 
   // reavalia os aria-labels quando o idioma muda
-  const langToggles = [
-    document.getElementById("langToggle"),
-    document.getElementById("langToggleMobile"),
-  ].filter(Boolean);
-  langToggles.forEach((b) => b.addEventListener("click", () => setTimeout(sync, 0)));
+  document.addEventListener("langchange", sync);
+
+  // acompanha o tema do sistema em runtime — mas só se o usuário nunca escolheu
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const onSystem = (e) => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem(STORE);
+    } catch (err) {}
+    if (saved !== "light" && saved !== "dark") apply(e.matches ? "dark" : "light");
+  };
+  if (mq.addEventListener) mq.addEventListener("change", onSystem);
+  else if (mq.addListener) mq.addListener(onSystem);
 
   window.themeToggle = { toggle, current, set: apply };
 })();
