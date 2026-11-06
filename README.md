@@ -6,7 +6,9 @@ Meu site pessoal. Fiz pra mostrar meus projetos, o que eu sei fazer e como me en
 
 ## O que tem
 
-- Command palette (Ctrl/Cmd + K): busca pra navegar e agir — pular pra seção, abrir projeto, copiar e-mail, trocar idioma. Teclado completo (setas, Enter, Esc), busca sem acento e ARIA de combobox/listbox
+- Command palette (Ctrl/Cmd + K): busca pra navegar e agir — pular pra seção, abrir projeto, copiar e-mail, trocar idioma e tema. Teclado completo (setas, Enter, Esc), busca sem acento e ARIA de combobox/listbox
+- Tema claro/escuro: lembra a escolha, detecta a preferência do sistema e aplica antes da página pintar (sem flash, com hash no CSP)
+- Modal de detalhes em cada projeto, com foco preso e fechamento por Esc
 - Robô 3D feito com Three.js que segue o cursor (só desktop)
 - Troca de idioma PT/EN, detecta o idioma do navegador e lembra a escolha
 - Barra de progresso de leitura no topo da página
@@ -31,11 +33,14 @@ HTML5, CSS3, JavaScript (ES2015+), Three.js, Google Fonts (Sora + Space Mono).
 index.html           página principal
 style.css            estilos
 features.css         toggle de idioma e botão de WhatsApp
-enhancements.css     estilos da command palette e dos detalhes em JS
+enhancements.css     command palette, modal, avatar e detalhes em JS
+theme.css            botão de tema e paleta do tema claro
 script.js            menu, scroll, tilt 3D, contador de stats
 features.js          lógica PT/EN
+theme.js             tema claro/escuro (persistência + preferência do sistema)
 command-palette.js   command palette (Ctrl/Cmd + K)
 enhancements.js      progresso de leitura, scrollspy, voltar ao topo, relógio
+projects-modal.js    modal de detalhes dos projetos
 robot3d.js           robô 3D (Three.js)
 robots.txt           diretiva pros crawlers
 sitemap.xml          mapa do site
